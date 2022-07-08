@@ -12,11 +12,14 @@ class Group extends Model
     public function student(){
         return $this->hasMany(Student::class);
     }
-    public function gameoption(){
-        return $this->hasMany(GameOption::class);
+    public function gameresult(){
+        return $this->hasMany(GameResult::class);
     }
-    public function group(){
-        return $this->hasMany(School::class);
+    public function school(){
+        return $this->belongsTo(School::class);
+    }
+    public function teacher(){
+        return $this->belongsTo(Teacher::class);
     }
     
 }

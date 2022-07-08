@@ -20,7 +20,7 @@ class StudentFactory extends Factory
         return [
             'first_name' => fake()->name(),
             'last_name' => fake()->name(),
-            'group_id'=>Group::factory()
+            'group_id'=>Group::factory(),
         ];
     }
 }

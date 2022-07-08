@@ -31,6 +31,7 @@ return new class extends Migration
     {
         Schema::table('students', function (Blueprint $table) {
             $table->dropForeign(['group_id']);
+
         });
         Schema::dropIfExists('students');
     }

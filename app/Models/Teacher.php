@@ -19,8 +19,12 @@ class Teacher extends Model
 
     }
 
-    public function gameoption(){
-        return $this->hasMany(GameOption::class);
+    public function gameResult(){
+        return $this->hasMany(GameResult::class);
+    }
+
+    public function group(){
+        return $this->hasMany(Group::class);
     }
 
 

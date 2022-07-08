@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('group_name')->unique();
             $table->foreignId('school_id')->constrained()->onDelete('cascade');
+            $table->foreignId('teacher_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +31,7 @@ return new class extends Migration
     {
         Schema::table('groups', function (Blueprint $table) {
             $table->dropForeign(['school_id']);
+            $table->dropForeign(['teacher_id']);
 
         });
         Schema::dropIfExists('groups');

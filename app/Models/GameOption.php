@@ -12,8 +12,8 @@ class GameOption extends Model
     public function game(){
         return $this->belongsTo(Game::class);
     }
-    public function gameoption(){
-        return $this->hasMany(GameOption::class);
+    public function gameresults(){
+        return $this->hasMany(Gameresults::class);
     }
 
 

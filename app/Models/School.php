@@ -13,11 +13,11 @@ class School extends Model
         return $this->hasMany(Teacher::class);
     }
 
-    public function gameoption(){
-        return $this->hasMany(GameOption::class);
+    public function gameresults(){
+        return $this->hasMany(GameResults::class);
     }
     public function group(){
-        return $this->belongsTo(Group::class);
+        return $this->hasMany(Group::class);
     }
 
 }
