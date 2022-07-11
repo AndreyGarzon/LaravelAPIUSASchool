@@ -8,6 +8,7 @@ use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
 use App\Models\Teacher;
 use App\Models\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class GroupController extends Controller
 {
@@ -51,19 +52,19 @@ class GroupController extends Controller
     public function show(Request $request)
     {
         $user = User::findOrFail($request->user_id);
-        $state= $user["state"];
+        $state = $user["state"];
 
-        
-        if($state==1){
-            $group=  User::findOrFail($request->user_id)->Teacher->Group;
+
+        if ($state == 1) {
+
+            $group =  User::findOrFail($request->user_id)->Teacher->Group ?? array();
+
             return $group;
-        }
-        else{
+        } else {
             return response()->json([
-                'message'=> 'User disabled'
-            ],status:401);
+                'message' => 'User disabled'
+            ], status: 401);
         }
-
     }
 
     /**
