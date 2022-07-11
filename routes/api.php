@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GroupController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,5 @@ Route::post('/register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);
 
 Route::post('/userinfo',[AuthController::class,'userinfo'])->middleware('auth:sanctum');
+
+Route::post('/group',[GroupController::class,'show'])->middleware('auth:sanctum');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
 
@@ -45,9 +46,21 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function show(Group $group)
+    public function show(Request $request)
     {
-        //
+        
+        $state= $request["state"];
+
+        
+        if($state==1){
+        $group=  Group::findOrFail($request->teacher_id);
+        return $group;}
+        else{
+            return response()->json([
+                'message'=> 'User disabled'
+            ],status:401);
+        }
+
     }
 
     /**
