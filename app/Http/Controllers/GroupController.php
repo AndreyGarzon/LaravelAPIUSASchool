@@ -6,6 +6,8 @@ use App\Models\Group;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
+use App\Models\Teacher;
+use App\Models\User;
 
 class GroupController extends Controller
 {
@@ -48,13 +50,14 @@ class GroupController extends Controller
      */
     public function show(Request $request)
     {
-        
-        $state= $request["state"];
+        $user = User::findOrFail($request->user_id);
+        $state= $user["state"];
 
         
         if($state==1){
-        $group=  Group::findOrFail($request->teacher_id);
-        return $group;}
+            $group=  User::findOrFail($request->user_id)->Teacher->Group;
+            return $group;
+        }
         else{
             return response()->json([
                 'message'=> 'User disabled'
