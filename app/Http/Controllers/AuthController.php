@@ -11,15 +11,21 @@ class AuthController extends Controller
 {
     public function register (Request $request){
         $validatedData = $request->validate([
-            'name'=> 'required|string|max:255',
+            'first_name'=> 'required|string|max:255',
+            'last_name'=> 'required|string|max:255',
+            // 'phone'=> 'required|string|max:20',
             'email'=> 'required|string|email|max:255|unique:users',
-            'password'=>'required|string|min:8'
+            'password'=>'required|string|min:8',
+            'state'=>'required|string|max:1'
         ]);
 
         $user = User::create([
-            'name'=> $validatedData['name'],
+            'first_name'=> $validatedData['first_name'],
+            'last_name'=> $validatedData['last_name'],
+            // 'phone'=> $validatedData['phone'],
             'email'=> $validatedData['email'],
-            'password'=>Hash::make($validatedData['password'])
+            'password'=>Hash::make($validatedData['password']),
+            'state'=> $validatedData['state'],
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
