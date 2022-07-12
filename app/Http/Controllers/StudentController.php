@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
-
+use App\Models\Group;
+use App\Models\User;
 class StudentController extends Controller
 {
     /**
@@ -45,9 +47,21 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student)
+    public function show(Request $request)
     {
-        //
+        $user = User::findOrFail($request->user_id);
+        $state = $user["state"];
+
+
+        if ($state == 1) {
+
+            $student =  Group::findOrFail($request->group_id)->Student ?? array();
+            return $student;
+        } else {
+            return response()->json([
+                'message' => 'User disabled'
+            ], status: 401);
+        }
     }
 
     /**

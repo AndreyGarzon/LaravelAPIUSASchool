@@ -6,9 +6,8 @@ use App\Models\Group;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
-use App\Models\Teacher;
 use App\Models\User;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 
 class GroupController extends Controller
 {
@@ -58,7 +57,6 @@ class GroupController extends Controller
         if ($state == 1) {
 
             $group =  User::findOrFail($request->user_id)->Teacher->Group ?? array();
-
             return $group;
         } else {
             return response()->json([
