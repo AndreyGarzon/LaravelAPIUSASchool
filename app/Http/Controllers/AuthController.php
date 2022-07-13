@@ -49,6 +49,13 @@ class AuthController extends Controller
             'token_type' => 'Bearer'
         ]);
     }
+    //Email verification
+    public function verify(Request $request){
+
+        return response()->json([
+            'message' => 'User email verified'
+        ], status: 200);
+    }
 
     public function userinfo(Request $request)
     {

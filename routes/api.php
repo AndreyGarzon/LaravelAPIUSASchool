@@ -26,8 +26,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 // Auth API
+
+Route::get('/verified-only',[AuthController::class,'verify'])->middleware('auth:sanctum','verified');
 Route::post('/register',[AuthController::class,'register']);
-Route::post('/login',[AuthController::class,'login'])->middleware('verified');
+Route::post('/login',[AuthController::class,'login']);
 Route::post('/logout',[AuthController::class,'logout'])->middleware('auth:sanctum');
 Route::post('/password/email', 'Api\ForgotPasswordController@sendResetLinkEmail');
 Route::post('/password/reset', 'Api\ResetPasswordController@reset');
