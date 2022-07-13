@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     {
-        $validatedData =Validator::make($request->all(),[
+        $validatedData = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             // 'phone'=> 'required|string|max:20',
@@ -20,23 +20,9 @@ class AuthController extends Controller
             'password' => 'required|string|min:8',
             'state' => 'required|string|max:1'
         ]);
-        if ($validatedData->fails()) {
-            $errors = $validatedData->errors()->toArray();
-            return response()->json([
-                'message' => $errors['email']
-            ], status: 400);
+        $validatedData['password'] = Hash::make($request->password);
 
-        }
-        else {
-
-            $user = User::create([
-                'first_name' => $validatedData['first_name'],
-                'last_name' => $validatedData['last_name'],
-                // 'phone'=> $validatedData['phone'],
-                'email' => $validatedData['email'],
-                'password' => Hash::make($validatedData['password']),
-                'state' => $validatedData['state'],
-            ]);
+            $user = User::create($validatedData);
 
             $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -44,7 +30,7 @@ class AuthController extends Controller
                 'access_token' => $token,
                 'token_type' => 'Bearer'
             ]);
-        }
+        
     }
 
     public function login(Request $request)

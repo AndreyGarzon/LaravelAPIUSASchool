@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\VerificationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\StudentController;
@@ -17,15 +18,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+// Auth API
 Route::post('/register',[AuthController::class,'register']);
-
-Route::post('/login',[AuthController::class,'login']);
+Route::post('/login',[AuthController::class,'login'])->middleware('verified');
 Route::post('/logout',[AuthController::class,'logout'])->middleware('auth:sanctum');
+Route::post('/password/email', 'Api\ForgotPasswordController@sendResetLinkEmail');
+Route::post('/password/reset', 'Api\ResetPasswordController@reset');
+Route::get('/email/resend', [VerificationController::class,'resend'])->name('verification.resend');
+Route::get('/email/verify/{id}/{hash}', [VerificationController::class,'verify'])->name('verification.verify');
+//App API
 Route::get('/userinfo',[AuthController::class,'userinfo'])->middleware('auth:sanctum');
-
 Route::post('/group',[GroupController::class,'show'])->middleware('auth:sanctum');
 Route::post('/student',[StudentController::class,'show'])->middleware('auth:sanctum');
