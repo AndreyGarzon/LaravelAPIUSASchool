@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 
 class VerificationController extends Controller
 {
@@ -72,7 +74,7 @@ class VerificationController extends Controller
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function verify(Request $request)
+    public function verify(Request $request, $redirectToRoute = null)
     {
         auth()->loginUsingId($request->route('id'));
 
@@ -91,7 +93,9 @@ class VerificationController extends Controller
             event(new Verified($request->user()));
         }
 
-        return response(['message'=>'Successfully verified']);
+        return $request->expectsJson()
+        ? abort(200, 'Email verified')
+        : Redirect::route('email-verified');
 
     }
 
