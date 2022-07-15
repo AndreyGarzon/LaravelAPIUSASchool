@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\NewPasswordController;
 use App\Http\Controllers\Api\VerificationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GroupController;
@@ -35,6 +36,9 @@ Route::post('/password/email', 'Api\ForgotPasswordController@sendResetLinkEmail'
 Route::post('/password/reset', 'Api\ResetPasswordController@reset');
 Route::get('/email/resend', [VerificationController::class,'resend'])->name('verification.resend');
 Route::get('/email/verify/{id}/{hash}', [VerificationController::class,'verify'])->name('verification.verify');
+Route::post('forgot-password', [NewPasswordController::class, 'forgotPassword']);
+Route::post('reset-password', [NewPasswordController::class, 'reset']);
+
 //App API
 Route::get('/userinfo',[AuthController::class,'userinfo'])->middleware('auth:sanctum');
 Route::post('/group',[GroupController::class,'show'])->middleware('auth:sanctum');
