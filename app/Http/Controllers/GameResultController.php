@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\GameResult;
 use App\Http\Requests\StoreGameResultRequest;
 use App\Http\Requests\UpdateGameResultRequest;
+use Illuminate\Http\Request;
 
 class GameResultController extends Controller
 {
@@ -34,9 +35,24 @@ class GameResultController extends Controller
      * @param  \App\Http\Requests\StoreGameResultRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreGameResultRequest $request)
+    public function store(Request  $request)
     {
-        //
+        foreach($request->data as $data){
+        $gameResult = new GameResult();
+        $gameResult->school_id      = $data['school_id'];
+        $gameResult->teacher_id     = $data['teacher_id'];
+        $gameResult->group_id       = $data['group_id'];
+        $gameResult->student_id     = $data['student_id'];
+        $gameResult->game_id        = $data['game_id'];
+        $gameResult->game_option_id = $data['game_option_id'];
+        $gameResult->save();
+        }
+        return response()->json([
+            'message' => "Game result saved",
+ 
+        ]);
+    
+
     }
 
     /**
