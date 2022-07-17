@@ -46,3 +46,4 @@ Route::get('/userinfo',[AuthController::class,'userinfo'])->middleware('auth:san
 Route::post('/group',[GroupController::class,'show'])->middleware('auth:sanctum');
 Route::post('/student',[StudentController::class,'show'])->middleware('auth:sanctum');
 Route::post('/gameresult/save',[GameResultController::class,'store'])->middleware('auth:sanctum');
+Route::post('/gameresult/game-results-report',[GameResultController::class,'GameResultsReport'])->middleware('auth:sanctum');

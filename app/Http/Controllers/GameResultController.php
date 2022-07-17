@@ -6,6 +6,7 @@ use App\Models\GameResult;
 use App\Http\Requests\StoreGameResultRequest;
 use App\Http\Requests\UpdateGameResultRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GameResultController extends Controller
 {
@@ -61,9 +62,22 @@ class GameResultController extends Controller
      * @param  \App\Models\GameResult  $gameResult
      * @return \Illuminate\Http\Response
      */
-    public function show(GameResult $gameResult)
+    public function show(Request $request)
     {
-        //
+        // $queryResult = DB::select('CALL `usaschool`.`GetAllGamesResults`(?,?)', ["2022-07-15",21]);
+
+        // $result = collect($queryResult);
+
+        // return $result;
+    }
+
+    public function GameResultsReport(Request $request)
+    {
+        $queryResult = DB::select('CALL `usaschool`.`GetAllGamesResults`(?,?)', ["2022-07-15",21]);
+
+        $result = collect($queryResult);
+
+        return $result;
     }
 
     /**
@@ -72,9 +86,9 @@ class GameResultController extends Controller
      * @param  \App\Models\GameResult  $gameResult
      * @return \Illuminate\Http\Response
      */
-    public function edit(GameResult $gameResult)
+    public function edit(Request $request)
     {
-        //
+
     }
 
     /**
