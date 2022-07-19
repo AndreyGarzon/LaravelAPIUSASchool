@@ -12,8 +12,8 @@ class Student extends Model
     public function group(){
         return $this->belongsTo(Group::class);
     }
-    public function gameResults(){
-        return $this->hasMany(GameResult::class);
+    public function sessiongame(){
+        return $this->hasMany(SessionGame::class);
     }
     
 }

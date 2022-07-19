@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Role;
+use App\Models\GameGroup;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class RoleSeeder extends Seeder
+class GameGroupSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,12 +18,15 @@ class RoleSeeder extends Seeder
     {
         $data = [
             [
-                'role_name'=>'admin',
+                'game_group_name'=>'Letter Recognition',
             ],
             [
-                'role_name'=>'teacher',
+                'game_group_name'=>'Sound Recognition',
+            ],
+            [
+                'game_group_name'=>'Dolch',
             ]
             ];
-        DB::table('roles')->insert($data);
+        DB::table('game_groups')->insert($data);
     }
 }

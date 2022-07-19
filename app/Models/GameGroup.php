@@ -5,14 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class GameResult extends Model
+class GameGroup extends Model
 {
     use HasFactory;
 
+    
     public function game(){
-        return $this->belongsTo(Game::class);
+        return $this->hasMany(Game::class);
     }
+    
     public function gameoption(){
-        return $this->belongsTo(GameOption::class);
+        return $this->hasMany(GameOption::class);
     }
 }
+

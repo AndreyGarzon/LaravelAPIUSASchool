@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('game_group_id')->constrained()->onDelete('cascade');
             $table->string("game_name");
             $table->timestamps();
         });
@@ -27,6 +28,9 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('games', function (Blueprint $table) {
+            $table->dropForeign(['game_group_id']);
+        });
         Schema::dropIfExists('games');
     }
 };

@@ -18,8 +18,10 @@ class GameOptionFactory extends Factory
     public function definition()
     {
         return [
-            'game_option'=>fake()->unique()->sentence(3),
-            'game_id'=>Game::factory()
+            'game_option'=>'TRUE',
+            'game_option'=>'FALSE',
+            'game_option'=>'NULL'
+            // 'game_id'=>Game::factory()
         ];
     }
 }

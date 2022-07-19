@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('schools', function (Blueprint $table) {
+        Schema::create('state_session_games', function (Blueprint $table) {
             $table->id();
-            $table->string("school_name")->unique();
-            $table->string('state');
+            $table->string('state_session_game_name')->unique();
             $table->timestamps();
         });
     }
@@ -28,6 +27,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('schools');
+
+        Schema::dropIfExists('state_session_games');
     }
 };

@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\School;
+
 use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,7 +20,8 @@ class GroupFactory extends Factory
     {
         return [
             'group_name' => fake()->unique()->sentence(3),
-            'school_id' => School::factory(),
+            'group_name' => fake()->unique()->sentence(3),
+            'group_name' => fake()->unique()->sentence(3),
             'teacher_id' =>Teacher::factory()
         ];
     }

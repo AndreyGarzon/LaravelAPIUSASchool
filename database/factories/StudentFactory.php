@@ -18,8 +18,8 @@ class StudentFactory extends Factory
     public function definition()
     {
         return [
-            'first_name' => fake()->name(),
-            'last_name' => fake()->name(),
+            'first_name' => fake()->unique()->name(),
+            'last_name' => fake()->unique()->name(),
             'group_id'=>Group::factory(),
         ];
     }

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\School;
-use App\Http\Requests\StoreSchoolRequest;
-use App\Http\Requests\UpdateSchoolRequest;
+use App\Models\StateSessionGame;
+use App\Http\Requests\StoreStateSessionGameRequest;
+use App\Http\Requests\UpdateStateSessionGameRequest;
 
-class SchoolController extends Controller
+class StateSessionGameController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +31,10 @@ class SchoolController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreSchoolRequest  $request
+     * @param  \App\Http\Requests\StoreStateSessionGameRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreSchoolRequest $request)
+    public function store(StoreStateSessionGameRequest $request)
     {
         //
     }
@@ -42,10 +42,10 @@ class SchoolController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\School  $school
+     * @param  \App\Models\StateSessionGame  $stateSessionGame
      * @return \Illuminate\Http\Response
      */
-    public function show(School $school)
+    public function show(StateSessionGame $stateSessionGame)
     {
         //
     }
@@ -53,10 +53,10 @@ class SchoolController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\School  $school
+     * @param  \App\Models\StateSessionGame  $stateSessionGame
      * @return \Illuminate\Http\Response
      */
-    public function edit(School $school)
+    public function edit(StateSessionGame $stateSessionGame)
     {
         //
     }
@@ -64,11 +64,11 @@ class SchoolController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateSchoolRequest  $request
-     * @param  \App\Models\School  $school
+     * @param  \App\Http\Requests\UpdateStateSessionGameRequest  $request
+     * @param  \App\Models\StateSessionGame  $stateSessionGame
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSchoolRequest $request, School $school)
+    public function update(UpdateStateSessionGameRequest $request, StateSessionGame $stateSessionGame)
     {
         //
     }
@@ -76,10 +76,10 @@ class SchoolController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\School  $school
+     * @param  \App\Models\StateSessionGame  $stateSessionGame
      * @return \Illuminate\Http\Response
      */
-    public function destroy(School $school)
+    public function destroy(StateSessionGame $stateSessionGame)
     {
         //
     }

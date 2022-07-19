@@ -16,17 +16,17 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            RoleSeeder::class,
             UserSeeder::class,
-            SchoolSeeder::class,
+            GameGroupSeeder::class,
             TeacherSeeder::class,
             GroupSeeder::class,
-            RoleSeeder::class,
             StudentSeeder::class,
+            StateSessionGameSeeder::class,
+            SessionGameSeeder::class,
             GameSeeder::class,
             GameOptionSeeder::class,
             GameResultSeeder::class,
-
-
         ]);
 
         // \App\Models\User::factory()->create([

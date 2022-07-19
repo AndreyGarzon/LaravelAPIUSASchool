@@ -23,15 +23,10 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-
 // Auth API
 
-Route::get('/verified-only',[AuthController::class,'verify'])->middleware('auth:sanctum','verified');
-Route::post('/register',[AuthController::class,'register']);
+Route::get('/user/verified-only',[AuthController::class,'verify'])->middleware('auth:sanctum','verified');
+Route::post('/user/register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);
 Route::post('/logout',[AuthController::class,'logout'])->middleware('auth:sanctum');
 Route::post('/password/email', 'Api\ForgotPasswordController@sendResetLinkEmail');
@@ -42,8 +37,8 @@ Route::post('forgot-password', [NewPasswordController::class, 'forgotPassword'])
 Route::post('reset-password', [NewPasswordController::class, 'reset']);
 
 //App API
-Route::get('/userinfo',[AuthController::class,'userinfo'])->middleware('auth:sanctum');
-Route::post('/group',[GroupController::class,'show'])->middleware('auth:sanctum');
-Route::post('/student',[StudentController::class,'show'])->middleware('auth:sanctum');
+Route::get('/user/show',[AuthController::class,'userinfo'])->middleware('auth:sanctum');
+Route::post('/group/show',[GroupController::class,'show'])->middleware('auth:sanctum');
+Route::post('/student/show',[StudentController::class,'show'])->middleware('auth:sanctum');
 Route::post('/gameresult/save',[GameResultController::class,'store'])->middleware('auth:sanctum');
 Route::post('/gameresult/game-results-report',[GameResultController::class,'GameResultsReport'])->middleware('auth:sanctum');

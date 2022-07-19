@@ -16,9 +16,6 @@ return new class extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('school_id')->constrained()->onDelete('cascade');
-            
- 
             $table->timestamps();
             
         });
@@ -33,7 +30,7 @@ return new class extends Migration
     {
         Schema::table('teachers', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
-            $table->dropForeign(['school_id']);
+
         });
         Schema::dropIfExists('teachers');
 

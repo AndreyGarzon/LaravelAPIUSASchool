@@ -2,13 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Teacher>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\GameGroup>
  */
-class TeacherFactory extends Factory
+class GameGroupFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,10 +17,10 @@ class TeacherFactory extends Factory
     public function definition()
     {
         return [
-            'user_id'=>User::factory(),
-
-            
-
+            'game_group_name'=>'Letter Recognition',
+            'game_group_name'=>'Sound Recognition',
+            'game_group_name'=>'Dolch',
         ];
+        
     }
 }

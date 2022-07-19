@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\GameResult;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class GameResultSeeder extends Seeder
 {
@@ -15,6 +16,18 @@ class GameResultSeeder extends Seeder
      */
     public function run()
     {
-        GameResult::factory(10)->create();
+        for ($j =1; $j <=2; $j++){
+            for ($i =1; $i <=52; $i++){
+                $data = [
+                    [
+                        'session_game_id'=>$j,
+                        'game_id'=>$i,
+                        'game_option_id'=>rand(1,3),
+                        'created_at'=>now()
+                    ]
+                ];
+                DB::table('game_results')->insert($data);
+            }
+        }
     }
 }

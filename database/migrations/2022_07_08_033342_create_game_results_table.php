@@ -15,13 +15,9 @@ return new class extends Migration
     {
         Schema::create('game_results', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('school_id')->constrained()->onDelete('cascade');
-            $table->foreignId('teacher_id')->constrained()->onDelete('cascade');
-            $table->foreignId('group_id')->constrained()->onDelete('cascade');
-            $table->foreignId('student_id')->constrained()->onDelete('cascade');
+            $table->foreignId('session_game_id')->constrained()->onDelete('cascade');
             $table->foreignId('game_id')->constrained()->onDelete('cascade');
             $table->foreignId('game_option_id')->constrained()->onDelete('cascade');
-            
             $table->timestamps();
         });
     }
@@ -34,18 +30,9 @@ return new class extends Migration
     public function down()
     {
         Schema::table('game_results', function (Blueprint $table) {
-            // $table->dropForeign(['school_id']);
-
-            $table->dropForeign(['teacher_id']);
-
-            $table->dropForeign(['group_id']);
-
-            $table->dropForeign(['student_id']);
-
+            $table->dropForeign(['session_game_id']);
             $table->dropForeign(['game_id']);
-
             $table->dropForeign(['game_option_id']);
-
         });
         Schema::dropIfExists('game_results');
     }

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class UserSeeder extends Seeder
 {
@@ -15,6 +16,32 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-         User::factory(10)->create();
+         $data =  [
+            [
+                'role_id'=>'1',
+                'first_name'=> 'Andrey',
+                'last_name'=>'Garzon',
+                'phone'=>'',
+                'email'=>'andreygarzonquiroga@gmail.com',
+                'email_verified_at'=>now(),
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'state'=>'1',
+                'remember_token' => ''
+            ],
+            [
+                'role_id'=>'1',
+                'first_name'=> 'Jhon',
+                'last_name'=>'Martinez',
+                'phone'=>'',
+                'email'=>'jamarbe05@gmail.com',
+                'email_verified_at'=>now(),
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'state'=>'1',
+                'remember_token' => ''
+            ]
+
+
+        ];
+        DB::table('users')->insert($data);
     }
 }

@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('game_options', function (Blueprint $table) {
+        Schema::create('game_groups', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('game_group_id')->constrained()->onDelete('cascade');
-            $table->string("game_option_name")->nullable();
+            $table->string("game_group_name")->unique();
             $table->timestamps();
         });
     }
@@ -28,9 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('game_options', function (Blueprint $table) {
-            $table->dropForeign(['game_group_id']);
-        });
-        Schema::dropIfExists('game_options');
+        Schema::dropIfExists('game_groups');
     }
 };
