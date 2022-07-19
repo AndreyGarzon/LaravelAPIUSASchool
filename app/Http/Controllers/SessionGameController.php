@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\SessionGame;
 use App\Http\Requests\StoreSessionGameRequest;
 use App\Http\Requests\UpdateSessionGameRequest;
+use App\Models\GameResult;
+use Illuminate\Http\Request;
 
 class SessionGameController extends Controller
 {
@@ -79,8 +81,26 @@ class SessionGameController extends Controller
      * @param  \App\Models\SessionGame  $sessionGame
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SessionGame $sessionGame)
+    public function destroy(Request $request)
     {
-        //
+        $session = SessionGame::findOrFail($request->session_game_id);
+        $state = $session["state_session_game_id"];
+
+        if ($state == 2) {
+            
+            SessionGame::destroy([
+                $request->session_game_id
+            ]);
+
+            return response()->json([
+                'message' => "Game result deleted",
+                'session_game_id'=>$request->session_game_id
+            ]);
+        }
+        else {
+            return response()->json([
+                'message' => "Cannot be deleted because its a complete game register.",
+            ],status: 422) ;
+        }
     }
 }

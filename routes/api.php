@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\VerificationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GameResultController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\SessionGameController;
 use App\Http\Controllers\StudentController;
 use App\Models\GameResult;
 use Illuminate\Http\Request;
@@ -41,4 +42,5 @@ Route::get('/user/show',[AuthController::class,'userinfo'])->middleware('auth:sa
 Route::post('/group/show',[GroupController::class,'show'])->middleware('auth:sanctum');
 Route::post('/student/show',[StudentController::class,'show'])->middleware('auth:sanctum');
 Route::post('/gameresult/save',[GameResultController::class,'store'])->middleware('auth:sanctum');
+Route::delete('/sessiongame/destroy',[SessionGameController::class,'destroy'])->middleware('auth:sanctum');
 Route::post('/gameresult/game-results-report',[GameResultController::class,'GameResultsReport'])->middleware('auth:sanctum');

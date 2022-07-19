@@ -115,8 +115,8 @@ class GameResultController extends Controller
      * @param  \App\Models\GameResult  $gameResult
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GameResult $gameResult)
+    public function destroy(Request $request)
     {
-        //
+
     }
 }
