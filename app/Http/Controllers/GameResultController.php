@@ -79,7 +79,8 @@ class GameResultController extends Controller
 
     public function GameResultsReport(Request $request)
     {
-        $queryResult = DB::select('CALL `usaschool`.`GetAllGamesResults`(?,?)', ["2022-07-15",21]);
+
+        $queryResult = DB::select('CALL `usaschool`.`GetAllGamesResults`(?,?,?)', [$request->date,$request->group_id,$request->report_id]);
 
         $result = collect($queryResult);
 
