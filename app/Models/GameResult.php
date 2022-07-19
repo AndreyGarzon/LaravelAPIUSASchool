@@ -9,6 +9,12 @@ class GameResult extends Model
 {
     use HasFactory;
 
+    protected $fillable =[
+        'session_game_id',
+        'game_id',
+        'game_option_id',
+    ];
+
     public function game(){
         return $this->belongsTo(Game::class);
     }

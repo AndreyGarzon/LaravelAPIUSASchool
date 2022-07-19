@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class SessionGame extends Model
 {
     use HasFactory;
+    protected $fillable =[
+        'state_session_game_id',
+        'group_id',
+        'student_id',
+    ];
+
     public function statesessiongame(){
         return $this->belongsTo(StateSessionGame::class);
     }

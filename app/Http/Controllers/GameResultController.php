@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\GameResult;
 use App\Http\Requests\StoreGameResultRequest;
 use App\Http\Requests\UpdateGameResultRequest;
+use App\Models\SessionGame;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -38,19 +39,24 @@ class GameResultController extends Controller
      */
     public function store(Request  $request)
     {
-        foreach($request->data as $data){
-        $gameResult = new GameResult();
-        $gameResult->school_id      = $data['school_id'];
-        $gameResult->teacher_id     = $data['teacher_id'];
-        $gameResult->group_id       = $data['group_id'];
-        $gameResult->student_id     = $data['student_id'];
-        $gameResult->game_id        = $data['game_id'];
-        $gameResult->game_option_id = $data['game_option_id'];
-        $gameResult->save();
-        }
+        $session= $request->session;
+        $session_game = SessionGame::create([
+
+            "state_session_game_id" => $session['state_session_game_id'],
+            "group_id" => $session['group_id'],
+            "student_id" => $session['student_id']
+        ]);
+
+        foreach($request->game_results as $game_results){
+            GameResult::create([
+                "session_game_id"=>$session_game->id,
+                "game_id"=>$game_results['game_id'],
+                "game_option_id"=>$game_results['game_option_id']
+            ]);
+        };
+
         return response()->json([
-            'message' => "Game result saved",
- 
+            'message' => "Game result saved"
         ]);
     
 
