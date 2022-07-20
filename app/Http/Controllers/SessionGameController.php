@@ -47,9 +47,10 @@ class SessionGameController extends Controller
      * @param  \App\Models\SessionGame  $sessionGame
      * @return \Illuminate\Http\Response
      */
-    public function show(SessionGame $sessionGame)
+    public function show(Request $request)
     {
-        //
+        $session_games =  SessionGame::where('state_session_game_id','2')->get();
+        return $session_games;
     }
 
     /**

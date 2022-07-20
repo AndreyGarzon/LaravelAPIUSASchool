@@ -43,4 +43,5 @@ Route::post('/group/show',[GroupController::class,'show'])->middleware('auth:san
 Route::post('/student/show',[StudentController::class,'show'])->middleware('auth:sanctum');
 Route::post('/gameresult/save',[GameResultController::class,'store'])->middleware('auth:sanctum');
 Route::post('/gameresult/game-results-report',[GameResultController::class,'GameResultsReport'])->middleware('auth:sanctum');
+Route::get('/sessiongame/show',[SessionGameController::class,'show'])->middleware('auth:sanctum');
 Route::delete('/sessiongame/destroy',[SessionGameController::class,'destroy'])->middleware('auth:sanctum');
