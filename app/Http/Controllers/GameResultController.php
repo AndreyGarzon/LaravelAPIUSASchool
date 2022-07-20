@@ -93,7 +93,25 @@ class GameResultController extends Controller
      */
     public function edit(Request $request)
     {
+        $session= $request->session;
+        $session_game=SessionGame::find($session['session_game_id']);
+        $session_game->update([
+            "state_session_game_id" => $session['state_session_game_id']
+        ]);
 
+        foreach($request->game_results as $game_results){
+            $result=GameResult::find($game_results['game_result_id']);
+            $result->update([
+                "game_id"=>$game_results['game_id'],
+                "game_option_id"=>$game_results['game_option_id']
+            ]);
+        };
+
+        return response()->json([
+            'message' => "Game result update"
+        ]);
+
+    
     }
 
     /**
