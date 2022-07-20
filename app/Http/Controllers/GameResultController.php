@@ -68,13 +68,11 @@ class GameResultController extends Controller
      * @param  \App\Models\GameResult  $gameResult
      * @return \Illuminate\Http\Response
      */
+    
     public function show(Request $request)
     {
-        // $queryResult = DB::select('CALL `usaschool`.`GetAllGamesResults`(?,?)', ["2022-07-15",21]);
-
-        // $result = collect($queryResult);
-
-        // return $result;
+        $game_results =  GameResult::where('session_game_id',$request->session_game_id)->get();
+        return $game_results;
     }
 
     public function GameResultsReport(Request $request)
