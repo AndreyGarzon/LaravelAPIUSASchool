@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Teacher;
 use App\Models\User;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -17,10 +18,8 @@ class AuthController extends Controller
             'role_id'=>'required|integer',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            // 'phone'=> 'required|string|max:20',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'state' => 'required|string|max:1'
         ]);
         $validatedData['password'] = Hash::make($request->password);
 
@@ -36,6 +35,8 @@ class AuthController extends Controller
             ]);
         
     }
+
+
 
     public function login(Request $request)
     {

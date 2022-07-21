@@ -7,8 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
-    use HasFactory;
 
+    use HasFactory;
+    protected $fillable =[
+        'first_name',
+        'last_name',
+        'group_id'
+    ];
     public function group(){
         return $this->belongsTo(Group::class);
     }

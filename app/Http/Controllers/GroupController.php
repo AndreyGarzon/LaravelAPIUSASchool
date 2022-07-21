@@ -56,13 +56,6 @@ class GroupController extends Controller
         return $group[0]->group;
 
     }
-    
-    public function user_groups(Request $request)
-    {
-
-
-
-    }
 
     /**
      * Show the form for editing the specified resource.

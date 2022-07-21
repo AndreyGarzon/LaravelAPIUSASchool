@@ -38,7 +38,10 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
-        //
+            Student::insert($request->data);
+            return response()->json(
+                $request->data,status:201);
+
     }
 
     /**
@@ -49,7 +52,6 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-
         $student =  Student::where('group_id',$id)->get();
         return $student;
 
@@ -75,7 +77,8 @@ class StudentController extends Controller
      */
     public function update(UpdateStudentRequest $request, Student $student)
     {
-        //
+        $student->update($request->all());
+        return $student;
     }
 
     /**
@@ -86,6 +89,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        return response('',204);
     }
 }

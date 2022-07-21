@@ -17,18 +17,14 @@ class CheckRole
     public function handle(Request $request, Closure $next,string $role)
     {
         $roles = [
-            'admin'=>[1],
-            'meister'=>[2],
+            'admin'=>[1,2],
+            'meister'=>[1,2],
             'manager'=>[3]
         ];
 
         $roleIds = $roles[$role]??[];
 
-        if(!auth()->user()->state == '1')
-        {
-            abort(403, 'Not authorized');
-        }
-        else if (!in_array(auth()->user()->role_id,$roleIds)){
+        if (!in_array(auth()->user()->role_id,$roleIds)){
             abort(403, 'Not authorized');
         }
         else{

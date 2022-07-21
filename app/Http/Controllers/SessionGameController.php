@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateSessionGameRequest;
 use App\Models\GameResult;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SessionGameController extends Controller
 {
@@ -51,7 +52,7 @@ class SessionGameController extends Controller
     public function show($id)
     {
         // $session_games =  SessionGame::with('')->where('state_session_game_id','2')->where('teacher_id',$id)->get();
-        $session_games =  User::select('session_games.*')
+        $session_games =  User::select(DB::raw("CONCAT(students.first_name,' ',students.last_name) student_name"),'students.group_id','groups.group_name','session_games.*')
                                         ->join('teachers','users.id','=','teachers.user_id')
                                         ->join('groups','teachers.id','=','groups.teacher_id')
                                         ->join('students','groups.id','=','students.group_id')

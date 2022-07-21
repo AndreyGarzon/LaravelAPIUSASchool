@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\NewPasswordController;
 use App\Http\Controllers\Api\VerificationController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserAccessController;
 use App\Http\Controllers\GameResultController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\SessionGameController;
@@ -42,9 +43,9 @@ Route::get('/user_info',[AuthController::class,'user_info'])->middleware('auth:s
 Route::group(['middleware'=>['auth:sanctum','CheckRole:manager']],function(){
 //Game results API 
     Route::apiResource('gameresult',GameResultController::class)->only('show');
-    Route::post('gameresult/create',[GameResultController::class,'create_session_game_result']);
-    Route::put('gameresult/update',[GameResultController::class,'update_session_game_result']);
-    Route::post('gameresult/report',[GameResultController::class,'report']);
+    Route::post('/gameresult/create',[GameResultController::class,'create_session_game_result']);
+    Route::put('/gameresult/update',[GameResultController::class,'update_session_game_result']);
+    Route::post('/gameresult/report',[GameResultController::class,'report']);
 //Groups API
     Route::apiResource('group',GroupController::class);
 //Session games API
@@ -52,6 +53,17 @@ Route::group(['middleware'=>['auth:sanctum','CheckRole:manager']],function(){
 //Students API
     Route::apiResource('student',StudentController::class);
 });
+
+Route::group(['middleware'=>['auth:sanctum','CheckRole:admin']],function(){
+    //User meister API 
+    Route::apiResource('/useraccess',UserAccessController::class)->only('store','update');
+});
+
+// Route::group(['middleware'=>['auth:sanctum','CheckRole:admin'],'prefix'=>'user/admin'],function(){
+//     //User admin API 
+//     Route::post('/create',[UserAccessController::class,'create_any_user']);
+// });
+    
 
 
 
