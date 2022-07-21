@@ -18,7 +18,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -28,7 +28,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -39,7 +39,8 @@ class GroupController extends Controller
      */
     public function store(StoreGroupRequest $request)
     {
-        //
+        $group = Group::create($request->all());
+        return $group;
     }
 
     /**
@@ -48,21 +49,19 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show($id)
     {
-        $user = User::findOrFail($request->user_id);
-        $state = $user["state"];
+
+        $group =  User::with('group')->where('id',$id)->get();
+        return $group[0]->group;
+
+    }
+    
+    public function user_groups(Request $request)
+    {
 
 
-        if ($state == 1) {
 
-            $group =  User::findOrFail($request->user_id)->Teacher->Group ?? array();
-            return $group;
-        } else {
-            return response()->json([
-                'message' => 'User disabled'
-            ], status: 401);
-        }
     }
 
     /**
@@ -85,7 +84,9 @@ class GroupController extends Controller
      */
     public function update(UpdateGroupRequest $request, Group $group)
     {
-        //
+        $group->update($request->all());
+        return $group;
+
     }
 
     /**
@@ -96,6 +97,7 @@ class GroupController extends Controller
      */
     public function destroy(Group $group)
     {
-        //
+        $group->delete();
+        return response('',204);
     }
 }

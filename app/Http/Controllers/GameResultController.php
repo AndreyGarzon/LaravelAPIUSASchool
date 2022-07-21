@@ -39,6 +39,11 @@ class GameResultController extends Controller
      */
     public function store(Request  $request)
     {
+        //
+    }
+
+    public function create_session_game_result(Request  $request)
+    {
         $session= $request->session;
         $session_game = SessionGame::create([
 
@@ -56,11 +61,12 @@ class GameResultController extends Controller
         };
 
         return response()->json([
-            'message' => "Game result saved"
-        ]);
+            $session_game
+        ],status:201);
     
 
     }
+
 
     /**
      * Display the specified resource.
@@ -69,17 +75,16 @@ class GameResultController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function show(Request $request)
+
+    public function show($id)
     {
-        $game_results =  GameResult::where('session_game_id',$request->session_game_id)->get();
+        $game_results =  GameResult::where('session_game_id',$id)->get();
         return $game_results;
     }
 
-    public function GameResultsReport(Request $request)
+    public function report(Request $request)
     {
-
         $queryResult = DB::select('CALL `usaschool`.`GetAllGamesResults`(?,?,?)', [$request->date,$request->group_id,$request->report_id]);
-
         $result = collect($queryResult);
 
         return $result;
@@ -92,6 +97,23 @@ class GameResultController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Request $request)
+    {
+        //
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\UpdateGameResultRequest  $request
+     * @param  \App\Models\GameResult  $gameResult
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateGameResultRequest $request, GameResult $gameResult)
+    {
+        //
+    }
+    public function update_session_game_result(Request $request)
     {
         $session= $request->session;
         $session_game=SessionGame::find($session['session_game_id']);
@@ -110,22 +132,7 @@ class GameResultController extends Controller
         return response()->json([
             'message' => "Game result update"
         ]);
-
-    
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateGameResultRequest  $request
-     * @param  \App\Models\GameResult  $gameResult
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateGameResultRequest $request, GameResult $gameResult)
-    {
-        //
-    }
-
     /**
      * Remove the specified resource from storage.
      *

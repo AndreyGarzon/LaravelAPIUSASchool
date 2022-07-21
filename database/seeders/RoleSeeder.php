@@ -21,8 +21,11 @@ class RoleSeeder extends Seeder
                 'role_name'=>'admin',
             ],
             [
-                'role_name'=>'teacher',
-            ]
+                'role_name'=>'meister',
+            ],
+            [
+                'role_name'=>'manager',
+            ],
             ];
         DB::table('roles')->insert($data);
     }

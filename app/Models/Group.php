@@ -9,15 +9,13 @@ class Group extends Model
 {
     use HasFactory;
 
+    protected $fillable =[
+        'group_name',
+        'teacher_id'
+    ];
+
     public function student(){
         return $this->hasMany(Student::class);
-    }
-    public function sessiongame(){
-        return $this->hasMany(SessionGame::class);
-    }
-
-    public function teacher(){
-        return $this->belongsTo(Teacher::class);
     }
     
 }

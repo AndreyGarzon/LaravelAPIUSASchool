@@ -47,21 +47,12 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show($id)
     {
-        $user = User::findOrFail($request->user_id);
-        $state = $user["state"];
 
+        $student =  Student::where('group_id',$id)->get();
+        return $student;
 
-        if ($state == 1) {
-
-            $student =  Group::findOrFail($request->group_id)->Student ?? array();
-            return $student;
-        } else {
-            return response()->json([
-                'message' => 'User disabled'
-            ], status: 401);
-        }
     }
 
     /**

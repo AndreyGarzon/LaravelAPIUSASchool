@@ -8,6 +8,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\SessionGameController;
 use App\Http\Controllers\StudentController;
 use App\Models\GameResult;
+use App\Models\SessionGame;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,24 +27,35 @@ use Illuminate\Support\Facades\Route;
 
 // Auth API
 
-Route::get('/user/verified-only',[AuthController::class,'verify'])->middleware('auth:sanctum','verified');
 Route::post('/user/register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);
 Route::post('/logout',[AuthController::class,'logout'])->middleware('auth:sanctum');
-Route::post('/password/email', 'Api\ForgotPasswordController@sendResetLinkEmail');
-Route::post('/password/reset', 'Api\ResetPasswordController@reset');
+// Route::post('/password/email', 'Api\ForgotPasswordController@sendResetLinkEmail');
+// Route::post('/password/reset', 'Api\ResetPasswordController@reset');
 Route::get('/email/resend', [VerificationController::class,'resend'])->name('verification.resend');
 Route::get('/email/verify/{id}/{hash}', [VerificationController::class,'verify'])->name('verification.verify');
 Route::post('forgot-password', [NewPasswordController::class, 'forgotPassword']);
 Route::post('reset-password', [NewPasswordController::class, 'reset']);
+Route::get('/user_info',[AuthController::class,'user_info'])->middleware('auth:sanctum');
 
-//App API
-Route::get('/user/show',[AuthController::class,'userinfo'])->middleware('auth:sanctum');
-Route::post('/group/show',[GroupController::class,'show'])->middleware('auth:sanctum');
-Route::post('/student/show',[StudentController::class,'show'])->middleware('auth:sanctum');
-Route::post('/gameresult/save',[GameResultController::class,'store'])->middleware('auth:sanctum');
-Route::put('/gameresult/update',[GameResultController::class,'edit'])->middleware('auth:sanctum');
-Route::post('/gameresult/show',[GameResultController::class,'show'])->middleware('auth:sanctum');
-Route::post('/gameresult/game-results-report',[GameResultController::class,'GameResultsReport'])->middleware('auth:sanctum');
-Route::get('/sessiongame/show',[SessionGameController::class,'show'])->middleware('auth:sanctum');
-Route::delete('/sessiongame/destroy',[SessionGameController::class,'destroy'])->middleware('auth:sanctum');
+
+Route::group(['middleware'=>['auth:sanctum','CheckRole:manager']],function(){
+//Game results API 
+    Route::apiResource('gameresult',GameResultController::class)->only('show');
+    Route::post('gameresult/create',[GameResultController::class,'create_session_game_result']);
+    Route::put('gameresult/update',[GameResultController::class,'update_session_game_result']);
+    Route::post('gameresult/report',[GameResultController::class,'report']);
+//Groups API
+    Route::apiResource('group',GroupController::class);
+//Session games API
+    Route::apiResource('sessiongame',SessionGameController::class)->only('show','destroy');
+//Students API
+    Route::apiResource('student',StudentController::class);
+});
+
+
+
+
+
+
+

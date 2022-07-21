@@ -65,6 +65,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Role::class);
     }
 
+    public function group(){
+        return $this->hasManyThrough(Group::class,Teacher::class,'user_id','teacher_id','id','id');
+    }
+
     
 
 

@@ -18,12 +18,7 @@ class SessionGame extends Model
         return $this->belongsTo(StateSessionGame::class);
     }
     
-    // public function teacher(){
-    //     return $this->belongsTo(Teacher::class);
-    // }
-    public function group(){
-        return $this->belongsTo(Group::class);
-    }
+
     public function student(){
         return $this->belongsTo(Student::class);
     }

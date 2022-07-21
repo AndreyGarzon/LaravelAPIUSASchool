@@ -6,6 +6,7 @@ use App\Models\SessionGame;
 use App\Http\Requests\StoreSessionGameRequest;
 use App\Http\Requests\UpdateSessionGameRequest;
 use App\Models\GameResult;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SessionGameController extends Controller
@@ -47,9 +48,16 @@ class SessionGameController extends Controller
      * @param  \App\Models\SessionGame  $sessionGame
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show($id)
     {
-        $session_games =  SessionGame::where('state_session_game_id','2')->get();
+        // $session_games =  SessionGame::with('')->where('state_session_game_id','2')->where('teacher_id',$id)->get();
+        $session_games =  User::select('session_games.*')
+                                        ->join('teachers','users.id','=','teachers.user_id')
+                                        ->join('groups','teachers.id','=','groups.teacher_id')
+                                        ->join('students','groups.id','=','students.group_id')
+                                        ->join('session_games','students.id','=','session_games.student_id')
+                                        ->where('session_games.state_session_game_id','2')->where('users.id',$id)->get();
+        
         return $session_games;
     }
 
@@ -82,26 +90,10 @@ class SessionGameController extends Controller
      * @param  \App\Models\SessionGame  $sessionGame
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(SessionGame $sessiongame)
     {
-        $session = SessionGame::findOrFail($request->session_game_id);
-        $state = $session["state_session_game_id"];
-
-        if ($state == 2) {
-            
-            SessionGame::destroy([
-                $request->session_game_id
-            ]);
-
-            return response()->json([
-                'message' => "Game result deleted",
-                'session_game_id'=>$request->session_game_id
-            ]);
-        }
-        else {
-            return response()->json([
-                'message' => "Cannot be deleted because its a complete game register.",
-            ],status: 422) ;
-        }
+        
+        $sessiongame->delete();
+        return response('',204);
     }
 }

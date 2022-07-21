@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -24,7 +25,9 @@ class AuthController extends Controller
         $validatedData['password'] = Hash::make($request->password);
 
             $user = User::create($validatedData);
-
+            Teacher::create([
+                'user_id'=>$user->id
+            ]);
             $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
@@ -58,7 +61,7 @@ class AuthController extends Controller
         ], status: 200);
     }
 
-    public function userinfo(Request $request)
+    public function user_info(Request $request)
     {
         return $request->user();
     }

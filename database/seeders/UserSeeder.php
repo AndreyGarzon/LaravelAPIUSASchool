@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
                 'remember_token' => ''
             ],
             [
-                'role_id'=>'1',
+                'role_id'=>'3',
                 'first_name'=> 'Jhon',
                 'last_name'=>'Martinez',
                 'phone'=>'',

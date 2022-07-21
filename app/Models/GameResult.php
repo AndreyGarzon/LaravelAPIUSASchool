@@ -21,4 +21,7 @@ class GameResult extends Model
     public function gameoption(){
         return $this->belongsTo(GameOption::class);
     }
+    public function sessiongame(){
+        return $this->belongsTo(SessionGame::class);
+    }
 }
