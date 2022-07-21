@@ -48,7 +48,6 @@ class GameResultController extends Controller
         $session_game = SessionGame::create([
 
             "state_session_game_id" => $session['state_session_game_id'],
-            "group_id" => $session['group_id'],
             "student_id" => $session['student_id']
         ]);
 
