@@ -123,14 +123,12 @@ class GameResultController extends Controller
         foreach($request->game_results as $game_results){
             $result=GameResult::find($game_results['game_result_id']);
             $result->update([
-                "game_id"=>$game_results['game_id'],
+                // "game_id"=>$game_results['game_id'],
                 "game_option_id"=>$game_results['game_option_id']
             ]);
         };
 
-        return response()->json([
-            'message' => "Game result update"
-        ]);
+        return $session_game;
     }
     /**
      * Remove the specified resource from storage.
