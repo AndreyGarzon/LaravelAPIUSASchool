@@ -52,12 +52,21 @@ class SessionGameController extends Controller
     public function show($id)
     {
         // $session_games =  SessionGame::with('')->where('state_session_game_id','2')->where('teacher_id',$id)->get();
-        $session_games =  User::select(DB::raw("CONCAT(students.first_name,' ',students.last_name) student_name"),'students.group_id','groups.group_name','session_games.*')
+        $session_games =  User::select(DB::raw("CONCAT(students.first_name,' ',students.last_name) student_name"),
+                                                'students.group_id',
+                                                'groups.group_name',
+                                                'session_games.*',
+                                                'games.game_group_id',
+                                                'game_groups.game_group_name',
+                                                )
                                         ->join('teachers','users.id','=','teachers.user_id')
                                         ->join('groups','teachers.id','=','groups.teacher_id')
                                         ->join('students','groups.id','=','students.group_id')
                                         ->join('session_games','students.id','=','session_games.student_id')
-                                        ->where('session_games.state_session_game_id','2')->where('users.id',$id)->get();
+                                        ->join('game_results','session_games.id','=','game_results.session_game_id')
+                                        ->join('games','game_results.game_id','=','games.id')
+                                        ->join('game_groups','games.game_group_id','=','game_groups.id')
+                                        ->where('session_games.state_session_game_id','2')->where('users.id',$id)->distinct()->get();
         
         return $session_games;
     }
