@@ -56,14 +56,9 @@ Route::group(['middleware'=>['auth:sanctum','CheckRole:manager']],function(){
 
 Route::group(['middleware'=>['auth:sanctum','CheckRole:admin']],function(){
     //User meister API 
-    Route::apiResource('/useraccess',UserAccessController::class)->only('store','update');
+    Route::apiResource('/useraccess',UserAccessController::class);
 });
 
-// Route::group(['middleware'=>['auth:sanctum','CheckRole:admin'],'prefix'=>'user/admin'],function(){
-//     //User admin API 
-//     Route::post('/create',[UserAccessController::class,'create_any_user']);
-// });
-    
 
 
 

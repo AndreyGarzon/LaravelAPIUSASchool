@@ -13,7 +13,31 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 class UserAccessController extends Controller
 {
-    
+    public function index()
+    {
+        if(Auth()->user()->role_id ==1){
+            $user = User::all();
+            return $user;
+
+        }
+
+        elseif(Auth()->user()->role_id ==2){
+            
+            $user = user::all()->where('role_id','3');
+            return $user;
+        }
+        else {
+            return abort(403, 'Not authorized');
+        }
+   
+    }
+
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        return  $user;
+    }
+
     public function store(StoreUserAccessRequest $request)
     {
         if(Auth()->user()->role_id ==1){
@@ -71,8 +95,11 @@ class UserAccessController extends Controller
    
     }
 
-    public function update(UpdateUserAccessRequest $request, User $user)
+    public function update(UpdateUserAccessRequest $request, $id)
     {
+
+        $user = User::findOrFail($id);
+
         if(Auth()->user()->role_id ==1){
 
             $user->update([
@@ -108,6 +135,13 @@ class UserAccessController extends Controller
             return abort(403, 'Not authorized');
         }
    
+    }
+
+    public function destroy($id)
+    {
+        
+        $user=User::destroy($id);
+        return response('',204);
     }
 
 
