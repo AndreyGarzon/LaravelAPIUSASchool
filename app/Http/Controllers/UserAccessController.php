@@ -14,14 +14,14 @@ class UserAccessController extends Controller
     {
         if(Auth()->user()->role_id ==1){
             $user = User::select('users.*','roles.role_name')
-                            ->join('roles','users.role_id','roles.id')->get();
+                            ->join('roles','users.role_id','roles.id')->where('id', '!=', auth()->id())->get();
             return $user;
 
         }
 
         elseif(Auth()->user()->role_id ==2){
             $user = User::select('users.*','roles.role_name')
-            ->join('roles','users.role_id','roles.id')->where('role_id','3')->get();
+            ->join('roles','users.role_id','roles.id')->where('role_id','3')->where('id', '!=', auth()->id())->get();
             return $user;
         }
         else {
