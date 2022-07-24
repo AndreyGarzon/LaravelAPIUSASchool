@@ -6,24 +6,22 @@ use App\Http\Requests\StoreUserAccessRequest;
 use App\Http\Requests\UpdateUserAccessRequest;
 use App\Models\Teacher;
 use App\Models\User;
-use Illuminate\Auth\Events\Verified;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+
 class UserAccessController extends Controller
 {
     public function index()
     {
         if(Auth()->user()->role_id ==1){
-            $user = User::all();
+            $user = User::select('users.*','roles.role_name')
+                            ->join('roles','users.role_id','roles.id')->get();
             return $user;
 
         }
 
         elseif(Auth()->user()->role_id ==2){
-            
-            $user = user::all()->where('role_id','3');
+            $user = User::select('users.*','roles.role_name')
+            ->join('roles','users.role_id','roles.id')->where('role_id','3')->get();
             return $user;
         }
         else {

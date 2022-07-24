@@ -18,13 +18,13 @@ class RoleSeeder extends Seeder
     {
         $data = [
             [
-                'role_name'=>'admin',
+                'role_name'=>'Admin',
             ],
             [
-                'role_name'=>'meister',
+                'role_name'=>'Meister',
             ],
             [
-                'role_name'=>'manager',
+                'role_name'=>'Manager',
             ],
             ];
         DB::table('roles')->insert($data);
