@@ -10,8 +10,8 @@ class SessionGame extends Model
     use HasFactory;
     protected $fillable =[
         'state_session_game_id',
-        'group_id',
         'student_id',
+        'game_group_id'
     ];
 
     public function statesessiongame(){
@@ -21,6 +21,9 @@ class SessionGame extends Model
 
     public function student(){
         return $this->belongsTo(Student::class);
+    }
+    public function gamegroup(){
+        return $this->belongsTo(GameGroup::class);
     }
     
 }

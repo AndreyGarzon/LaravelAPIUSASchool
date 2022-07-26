@@ -23,15 +23,17 @@ class UserSeeder extends Seeder
                 'last_name'=>'Garzon',
                 'email'=>'andreygarzonquiroga@gmail.com',
                 'email_verified_at'=>now(),
+                'created_at'=>now(),
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => ''
             ],
             [
-                'role_id'=>'3',
+                'role_id'=>'2',
                 'first_name'=> 'Jhon',
                 'last_name'=>'Martinez',
                 'email'=>'jamarbe05@gmail.com',
                 'email_verified_at'=>now(),
+                'created_at'=>now(),
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => ''
             ]
@@ -39,5 +41,10 @@ class UserSeeder extends Seeder
 
         ];
         DB::table('users')->insert($data);
+
+
+
+        User::factory(30)->create();
     }
+
 }

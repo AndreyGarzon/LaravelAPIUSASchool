@@ -56,16 +56,13 @@ class SessionGameController extends Controller
                                                 'students.group_id',
                                                 'groups.group_name',
                                                 'session_games.*',
-                                                'games.game_group_id',
                                                 'game_groups.game_group_name',
                                                 )
                                         ->join('teachers','users.id','=','teachers.user_id')
                                         ->join('groups','teachers.id','=','groups.teacher_id')
                                         ->join('students','groups.id','=','students.group_id')
                                         ->join('session_games','students.id','=','session_games.student_id')
-                                        ->join('game_results','session_games.id','=','game_results.session_game_id')
-                                        ->join('games','game_results.game_id','=','games.id')
-                                        ->join('game_groups','games.game_group_id','=','game_groups.id')
+                                        ->join('game_groups','session_games.game_group_id','=','game_groups.id')
                                         ->where('session_games.state_session_game_id','2')->where('users.id',$id)->distinct()->get();
         
         return $session_games;

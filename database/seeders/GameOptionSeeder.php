@@ -18,41 +18,14 @@ class GameOptionSeeder extends Seeder
     {
         $data = [
             [
-                'game_group_id'=>'1', 
                 'game_option_name'=>'TRUE', 
             ],
             [
-                'game_group_id'=>'1', 
                 'game_option_name'=>'FALSE', 
             ],
             [
-                'game_group_id'=>'1', 
                 'game_option_name'=>'NULL', 
-            ],
-            [
-                'game_group_id'=>'2', 
-                'game_option_name'=>'TRUE', 
-            ],
-            [
-                'game_group_id'=>'2', 
-                'game_option_name'=>'FALSE', 
-            ],
-            [
-                'game_group_id'=>'2', 
-                'game_option_name'=>'NULL', 
-            ],
-            [
-                'game_group_id'=>'3', 
-                'game_option_name'=>'TRUE', 
-            ],
-            [
-                'game_group_id'=>'3', 
-                'game_option_name'=>'FALSE', 
-            ],
-            [
-                'game_group_id'=>'3', 
-                'game_option_name'=>'NULL', 
-            ],
+            ]
         ];
         DB::table('game_options')->insert($data);
     }

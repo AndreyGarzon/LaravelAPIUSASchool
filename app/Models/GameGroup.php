@@ -10,12 +10,9 @@ class GameGroup extends Model
     use HasFactory;
 
     
-    public function game(){
-        return $this->hasMany(Game::class);
+    public function sessiongame(){
+        return $this->hasMany(SessionGame::class);
     }
     
-    public function gameoption(){
-        return $this->hasMany(GameOption::class);
-    }
 }
 
