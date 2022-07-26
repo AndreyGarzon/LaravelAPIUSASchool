@@ -6,6 +6,7 @@ use App\Http\Requests\StoreUserAccessRequest;
 use App\Http\Requests\UpdateUserAccessRequest;
 use App\Models\Teacher;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserAccessController extends Controller
@@ -13,14 +14,14 @@ class UserAccessController extends Controller
     public function index()
     {
         if(Auth()->user()->role_id ==1){
-            $user = User::select('users.*','roles.role_name')
+            $user = User::select('users.role_id','users.first_name','users.last_name','users.email','users.email_verified_at',DB::raw("DATE_FORMAT(users.created_at, '%Y-%m-%d') created_date"),'users.updated_at','roles.role_name')
                             ->join('roles','users.role_id','roles.id')->where('users.id', '!=', auth()->id())->get();
             return $user;
 
         }
 
         elseif(Auth()->user()->role_id ==2){
-            $user = User::select('users.*','roles.role_name')
+            $user = User::select('users.role_id','users.first_name','users.last_name','users.email','users.email_verified_at',DB::raw("DATE_FORMAT(users.created_at, '%Y-%m-%d') created_date"),'users.update_at','roles.role_name')
             ->join('roles','users.role_id','roles.id')->where('role_id','3')->where('users.id', '!=', auth()->id())->get();
             return $user;
         }
