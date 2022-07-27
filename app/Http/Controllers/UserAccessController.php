@@ -8,6 +8,7 @@ use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 class UserAccessController extends Controller
 {
@@ -140,6 +141,16 @@ class UserAccessController extends Controller
     {
         
         $user=User::destroy($id);
+        return response('',204);
+    }
+
+    public function deleteAll(Request $request)
+    {
+
+        foreach($request->data as $users){
+            User::destroy($users['id']);
+        }
+        // return response()->json($users->id);
         return response('',204);
     }
 

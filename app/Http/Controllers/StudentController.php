@@ -92,4 +92,16 @@ class StudentController extends Controller
         $student->delete();
         return response('',204);
     }
+
+    
+    public function deleteAll(Request $request)
+    {
+
+        foreach($request->data as $student){
+            Student::destroy($student['id']);
+        }
+
+        // return response()->json($users->id);
+                return response('',204);
+    }
 }

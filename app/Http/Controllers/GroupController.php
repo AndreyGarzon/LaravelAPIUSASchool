@@ -93,4 +93,14 @@ class GroupController extends Controller
         $group->delete();
         return response('',204);
     }
+    public function deleteAll(Request $request)
+    {
+
+        foreach($request->data as $groups){
+            Group::destroy($groups['id']);
+        }
+
+        // return response()->json($users->id);
+                return response('',204);
+    }
 }

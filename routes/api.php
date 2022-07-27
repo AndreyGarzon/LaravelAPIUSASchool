@@ -33,15 +33,18 @@ Route::group(['middleware'=>['auth:sanctum','CheckRole:manager']],function(){
     Route::post('/gameresult/report',[GameResultController::class,'report']);
 //Groups API
     Route::apiResource('group',GroupController::class);
+    Route::post('/group/deleteall',[GroupController::class,'deleteAll']);
 //Session games API
     Route::apiResource('sessiongame',SessionGameController::class)->only('show','destroy');
 //Students API
     Route::apiResource('student',StudentController::class);
+    Route::post('/student/deleteall',[StudentController::class,'deleteAll']);
 });
 
 Route::group(['middleware'=>['auth:sanctum','CheckRole:admin']],function(){
     //User meister API 
     Route::apiResource('/useraccess',UserAccessController::class);
+    Route::post('/useraccess/deleteall',[UserAccessController::class,'deleteAll']);
 });
 
 
