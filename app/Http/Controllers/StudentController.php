@@ -97,7 +97,7 @@ class StudentController extends Controller
     public function deleteAll(Request $request)
     {
 
-        foreach($request->data as $student){
+        foreach($request->all() as $student){
             Student::destroy($student['id']);
         }
 

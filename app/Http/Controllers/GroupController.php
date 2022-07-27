@@ -96,7 +96,7 @@ class GroupController extends Controller
     public function deleteAll(Request $request)
     {
 
-        foreach($request->data as $groups){
+        foreach($request->all() as $groups){
             Group::destroy($groups['id']);
         }
 

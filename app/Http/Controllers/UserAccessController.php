@@ -147,7 +147,7 @@ class UserAccessController extends Controller
     public function deleteAll(Request $request)
     {
 
-        foreach($request->data as $users){
+        foreach($request->all() as $users){
             User::destroy($users['id']);
         }
         // return response()->json($users->id);
