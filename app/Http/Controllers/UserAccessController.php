@@ -113,7 +113,7 @@ class UserAccessController extends Controller
                     ]);
                     
                     return response()->json(
-                        $request->password,status:200);
+                        $user,status:200);
             }
             else {
                     $user->update([
@@ -125,7 +125,7 @@ class UserAccessController extends Controller
                         'password' => Hash::make($request->password),
                     ]);
                     return response()->json(
-                        $request->password,status:200);
+                        $user,status:200);
             }
 
 
@@ -144,7 +144,7 @@ class UserAccessController extends Controller
                 ]);
                 
                 return response()->json(
-                    $request->password,status:200);
+                    $user,status:200);
 
         }
         else {
@@ -157,7 +157,7 @@ class UserAccessController extends Controller
                     'password' => Hash::make($request->password),
                 ]);
                 return response()->json(
-                    $request->password,status:200);
+                    $user,status:200);
         }
         }
         else {
