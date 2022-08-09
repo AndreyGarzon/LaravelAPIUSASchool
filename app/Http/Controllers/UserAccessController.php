@@ -102,34 +102,64 @@ class UserAccessController extends Controller
 
         if(Auth()->user()->role_id ==1){
 
-            $user->update([
-                
-                'role_id'=> $request->role_id,
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
+            if ($request->id = '') {
+        
+                    $user->update([
+                    
+                        'role_id'=> $request->role_id,
+                        'first_name' => $request->first_name,
+                        'last_name' => $request->last_name,
+                        'email' => $request->email,
+                    ]);
+                    
+                    return response()->json(
+                        $user,status:200);
+    
+            }
+            else {
+                    $user->update([
+                    
+                        'role_id'=> $request->role_id,
+                        'first_name' => $request->first_name,
+                        'last_name' => $request->last_name,
+                        'email' => $request->email,
+                        'password' => Hash::make($request->password),
+                    ]);
+                    return response()->json(
+                        $user,status:200);
+            }
 
 
-                return response()->json(
-                    $user,status:200);
-            } 
+        } 
 
         elseif(Auth()->user()->role_id ==2){
             
-            $user->update([
+            if ($request->id = '') {
+        
+                $user->update([
                 
-                'role_id'=> '3',
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
-
-
+                    'role_id'=> $request->role_id,
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'email' => $request->email,
+                ]);
+                
                 return response()->json(
                     $user,status:200);
+
+        }
+        else {
+                $user->update([
+                
+                    'role_id'=> $request->role_id,
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                ]);
+                return response()->json(
+                    $user,status:200);
+        }
         }
         else {
             return abort(403, 'Not authorized');
