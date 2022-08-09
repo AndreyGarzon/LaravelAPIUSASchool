@@ -102,7 +102,7 @@ class UserAccessController extends Controller
 
         if(Auth()->user()->role_id ==1){
 
-            if ($request->id = '') {
+            if ($request->password = '') {
         
                     $user->update([
                     
@@ -134,7 +134,7 @@ class UserAccessController extends Controller
 
         elseif(Auth()->user()->role_id ==2){
             
-            if ($request->id = '') {
+            if ($request->password = '') {
         
                 $user->update([
                 
