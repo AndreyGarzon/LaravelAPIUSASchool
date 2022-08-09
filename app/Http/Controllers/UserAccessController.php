@@ -137,7 +137,7 @@ class UserAccessController extends Controller
         
                 $user->update([
                 
-                    'role_id'=> $request->role_id,
+                    'role_id'=> "3",
                     'first_name' => $request->first_name,
                     'last_name' => $request->last_name,
                     'email' => $request->email,
@@ -150,7 +150,7 @@ class UserAccessController extends Controller
         else {
                 $user->update([
                 
-                    'role_id'=> $request->role_id,
+                    'role_id'=> "3",
                     'first_name' => $request->first_name,
                     'last_name' => $request->last_name,
                     'email' => $request->email,
