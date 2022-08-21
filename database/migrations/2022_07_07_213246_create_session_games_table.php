@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('state_session_game_id')->constrained()->onDelete('cascade');
             $table->foreignId('student_id')->constrained()->onDelete('cascade');
-            $table->foreignId('game_group_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -32,7 +31,6 @@ return new class extends Migration
         Schema::table('session_games', function (Blueprint $table) {
             $table->dropForeign(['state_session_game_id']);
             $table->dropForeign(['student_id']);
-            $table->dropForeign(['game_group_id']);
         });
         Schema::dropIfExists('session_games');
     }

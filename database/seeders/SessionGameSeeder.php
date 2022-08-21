@@ -22,7 +22,6 @@ class SessionGameSeeder extends Seeder
                 [
                     'state_session_game_id'=>$j,
                     'student_id'=>$i,
-                    'game_group_id'=>'1',
                     'created_at'=>now()
                 ]
             ];
