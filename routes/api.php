@@ -17,8 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::post('/user/register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);
 Route::get('/logout',[AuthController::class,'logout'])->middleware('auth:sanctum');
-// Route::post('/password/email', 'Api\ForgotPasswordController@sendResetLinkEmail');
-// Route::post('/password/reset', 'Api\ResetPasswordController@reset');
 Route::get('/email/resend', [VerificationController::class,'resend'])->name('verification.resend');
 Route::get('/email/verify/{id}/{hash}', [VerificationController::class,'verify'])->name('verification.verify');
 Route::post('forgot-password', [NewPasswordController::class, 'forgotPassword']);
