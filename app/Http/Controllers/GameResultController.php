@@ -85,10 +85,17 @@ class GameResultController extends Controller
 
     public function report(Request $request)
     {
-        $queryResult = DB::select('CALL `usaschool`.`GetAllGamesResults`(?,?,?)', [$request->date,$request->group_id,$request->report_id]);
-        $result = collect($queryResult);
+        try {
+            $queryResult = DB::select('CALL `usaschool`.`GetAllGamesResults`(?,?,?)', [$request->date,$request->group_id,$request->report_id]);
+            $result = collect($queryResult);
+            return $result;
+        } catch (\Exception  $e) {
+            return response()->json([
+            ],status:200);
+        }
 
-        return $result;
+
+
     }
 
     /**
