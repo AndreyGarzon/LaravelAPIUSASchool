@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\NewPasswordController;
 use App\Http\Controllers\Api\VerificationController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\UserAccessController;
 use App\Http\Controllers\GameResultController;
 use App\Http\Controllers\GroupController;
@@ -39,6 +40,8 @@ Route::group(['middleware'=>['auth:sanctum','CheckRole:manager']],function(){
 //Students API
     Route::apiResource('student',StudentController::class);
     Route::post('/student/deleteall',[StudentController::class,'deleteAll']);
+//Games API
+    Route::apiResource('games',GameController::class)->only('show');
 });
 
 Route::group(['middleware'=>['auth:sanctum','CheckRole:admin']],function(){

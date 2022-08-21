@@ -24,8 +24,23 @@ class GameGroupSeeder extends Seeder
                 'game_group_name'=>'Sound Recognition',
             ],
             [
-                'game_group_name'=>'Dolch',
-            ]
+                'game_group_name'=>'Pre-K Dolch Sight Words',
+            ],
+            [
+                'game_group_name'=>'Kindergarten Dolch Sight Words',
+            ],
+            [
+                'game_group_name'=>'First Grade Dolch Sight Words',
+            ],
+            [
+                'game_group_name'=>'Second Grade Dolch Sight Words',
+            ],
+            [
+                'game_group_name'=>'Third Grade Dolch Sight Words',
+            ],
+            [
+                'game_group_name'=>'Noun Dolch Sight Words',
+            ],
             ];
         DB::table('game_groups')->insert($data);
     }

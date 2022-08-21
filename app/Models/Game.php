@@ -9,9 +9,9 @@ class Game extends Model
 {
     use HasFactory;
 
-    // public function gameoption(){
-    //     return $this->hasMany(GameOption::class);
-    // }
+    public function gamegroup(){
+        return $this->belongsTo(GameGroup::class);
+    }
 
     
 }

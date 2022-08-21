@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             GameGroupSeeder::class,
-            EducationLevelSeeder::class,
             TeacherSeeder::class,
             GroupSeeder::class,
             StudentSeeder::class,

@@ -45,11 +45,13 @@ class GameController extends Controller
      * @param  \App\Models\Game  $game
      * @return \Illuminate\Http\Response
      */
-    public function show(Game $game)
+    public function show($id)
     {
-        //
+        $games = Game::where('game_group_id',$id)->get();
+        return  $games;
     }
 
+    
     /**
      * Show the form for editing the specified resource.
      *

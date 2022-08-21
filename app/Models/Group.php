@@ -21,8 +21,6 @@ class Group extends Model
     public function teacher(){
         return $this->belongsTo(Teacher::class);
     }
-    public function education_level(){
-        return $this->belongsTo(Teacher::class);
-    }
+
     
 }

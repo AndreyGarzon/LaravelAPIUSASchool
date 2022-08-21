@@ -13,6 +13,8 @@ class GameGroup extends Model
     public function sessiongame(){
         return $this->hasMany(SessionGame::class);
     }
-    
+    public function game(){
+        return $this->hasMany(Games::class);
+    }
 }
 
