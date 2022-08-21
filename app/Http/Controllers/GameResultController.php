@@ -79,7 +79,7 @@ class GameResultController extends Controller
 
     public function show($id)
     {
-        $game_results =  GameResult::where('session_game_id',$id)->orderBy('priority', 'ASC')->get();
+        $game_results =  GameResult::select('game_results.*','games.game_name')->join('games','game_results.game_id','games.id')->where('session_game_id',$id)->orderBy('priority', 'ASC')->get();
         return $game_results;
     }
 
