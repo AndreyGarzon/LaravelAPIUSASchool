@@ -56,7 +56,8 @@ class GameResultController extends Controller
             GameResult::create([
                 "session_game_id"=>$session_game->id,
                 "game_id"=>$game_results['game_id'],
-                "game_option_id"=>$game_results['game_option_id']
+                "game_option_id"=>$game_results['game_option_id'],
+                "priority"=>$game_results['priority'],
             ]);
         };
 
@@ -78,7 +79,7 @@ class GameResultController extends Controller
 
     public function show($id)
     {
-        $game_results =  GameResult::where('session_game_id',$id)->get();
+        $game_results =  GameResult::where('session_game_id',$id)->orderBy('priority', 'ASC')->get();
         return $game_results;
     }
 

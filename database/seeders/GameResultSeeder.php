@@ -23,6 +23,7 @@ class GameResultSeeder extends Seeder
                         'session_game_id'=>$j,
                         'game_id'=>$i,
                         'game_option_id'=>rand(1,3),
+                        'priority'=>$i,
                         'created_at'=>now()
                     ]
                 ];

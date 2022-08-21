@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('session_game_id')->constrained()->onDelete('cascade');
             $table->foreignId('game_id')->constrained()->onDelete('cascade');
             $table->foreignId('game_option_id')->constrained()->onDelete('cascade');
+            $table->integer('priority');
             $table->timestamps();
         });
     }

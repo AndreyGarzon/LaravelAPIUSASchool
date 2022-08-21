@@ -18,4 +18,11 @@ class Group extends Model
         return $this->hasMany(Student::class);
     }
     
+    public function teacher(){
+        return $this->belongsTo(Teacher::class);
+    }
+    public function education_level(){
+        return $this->belongsTo(Teacher::class);
+    }
+    
 }

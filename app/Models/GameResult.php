@@ -13,6 +13,7 @@ class GameResult extends Model
         'session_game_id',
         'game_id',
         'game_option_id',
+        'priority',
     ];
 
     public function game(){

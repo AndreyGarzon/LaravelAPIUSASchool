@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\EducationLevel;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             GameGroupSeeder::class,
+            EducationLevelSeeder::class,
             TeacherSeeder::class,
             GroupSeeder::class,
             StudentSeeder::class,
