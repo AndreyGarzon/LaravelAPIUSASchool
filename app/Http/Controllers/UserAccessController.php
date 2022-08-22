@@ -63,9 +63,7 @@ class UserAccessController extends Controller
                     $user,status:201);
             }
             else{
-                return response()->json([
-                    'message'=>'User created'
-                ],status:201);
+                response('User created',status:201);
             } 
     }
 
@@ -86,14 +84,10 @@ class UserAccessController extends Controller
                     'user_id'=>$user->id
                 ]);
 
-                return response()->json([
-                    'message'=>'User created'
-                ],status:201);
+                response('User created',status:201);
         }
         else {
-            return response()->json([
-                'message'=>'Not authorized'
-            ],status:403);
+            return abort('Not authorized',204);
         }
    
     }
@@ -114,10 +108,7 @@ class UserAccessController extends Controller
                         'last_name' => $request->last_name,
                         'email' => $request->email,
                     ]);
-                    
-                    return response()->json([
-                        'message'=>'User created'
-                    ],status:200);
+                    return response('User updated',status:200);
             }
             else {
                     $user->update([
@@ -128,9 +119,7 @@ class UserAccessController extends Controller
                         'email' => $request->email,
                         'password' => Hash::make($request->password),
                     ]);
-                    return response()->json([
-                        'message'=>'User created'
-                    ],status:200);
+                    return response('User updated',status:200);
             }
 
 
@@ -148,9 +137,7 @@ class UserAccessController extends Controller
                     'email' => $request->email,
                 ]);
                 
-                return response()->json([
-                    'message'=>'User created'
-                ],status:200);
+                return response('User updated',status:200);
 
         }
         else {
@@ -162,15 +149,11 @@ class UserAccessController extends Controller
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
                 ]);
-                return response()->json([
-                    'message'=>'User created'
-                ],status:200);
+                return response('User updated',status:200);
         }
         }
         else {
-            return response()->json([
-                'message'=>'Not authorized'
-            ],status:403);
+            return abort('Not authorized',204);
         }
    
     }
@@ -188,10 +171,7 @@ class UserAccessController extends Controller
         foreach($request->all() as $users){
             User::destroy($users['id']);
         }
-        // return response()->json($users->id);
-        return response()->json([
-            'message'=>'Delete completed'
-        ],status:204);
+        return response('Delete completed',204);
 
     }
 
