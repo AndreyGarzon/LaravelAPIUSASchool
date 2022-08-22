@@ -179,9 +179,7 @@ class UserAccessController extends Controller
     {
         
         User::destroy($id);
-        return response()->json([
-            'message'=>'Delete completed'
-        ],status:204);
+        return response('',204);
     }
 
     public function deleteAll(Request $request)
@@ -191,9 +189,7 @@ class UserAccessController extends Controller
             User::destroy($users['id']);
         }
         // return response()->json($users->id);
-        return response()->json([
-            'message'=>'Delete completed'
-        ],status:204);
+        return response('',204);
 
     }
 
