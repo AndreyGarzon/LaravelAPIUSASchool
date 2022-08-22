@@ -49,7 +49,7 @@ class GameResultController extends Controller
 
             "state_session_game_id" => $session['state_session_game_id'],
             "student_id" => $session['student_id'],
-            "game_group_id"=> $session['game_group_id'],
+
         ]);
 
         foreach($request->game_results as $game_results){
