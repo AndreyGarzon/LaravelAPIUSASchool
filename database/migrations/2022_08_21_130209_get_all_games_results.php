@@ -85,27 +85,21 @@ return new class extends Migration
             ) AS B
             ON A.student_id = B.student_id
         );
-        SET @sql = '';
+        SET SESSION group_concat_max_len=18446744073709551614;
+        SET @sql = NULL;
         SELECT
-            @sql := CONCAT(@sql,if(@sql='','',', '),temp.output)
-        FROM
-        (
-            SELECT
-              DISTINCT
-                CONCAT(
+          GROUP_CONCAT( 
+            CONCAT(
               'MAX(IF(SAB.game_name = ''',
               game_name,
               ''', SAB.game_option_name, NULL)) AS ',
               game_name
-                ) as output
-            FROM
-                GameResults
-        ) as temp;
-        
-        SET @sql = CONCAT('SELECT SAB.student_id
+            )
+          ) INTO @sql
+          FROM GameResults;
+          SET @sql = CONCAT('SELECT SAB.student_id
                             , SAB.student_name
-                            , AVG(PROM)  Total
-                            , ', @sql, ' 
+                            , AVG(PROM)  Total, ', @sql, ' 
                            FROM GameResults SAB
                             GROUP BY SAB.student_id,
                                         SAB.student_name
