@@ -64,7 +64,7 @@ class UserAccessController extends Controller
             }
             else{
                 return response()->json([
-                    'message'=>'User created'
+                    'message'=>'User created succesfully'
                 ],status:201);
             } 
     }
@@ -87,7 +87,7 @@ class UserAccessController extends Controller
                 ]);
 
                 return response()->json([
-                    'message'=>'User created'
+                    'message'=>'User created succesfully'
                 ],status:201);
         }
         else {
@@ -116,7 +116,7 @@ class UserAccessController extends Controller
                     ]);
                     
                     return response()->json([
-                        'message'=>'User updated'
+                        'message'=>'User updated succesfully'
                     ],status:200);
             }
             else {
@@ -129,7 +129,7 @@ class UserAccessController extends Controller
                         'password' => Hash::make($request->password),
                     ]);
                     return response()->json([
-                        'message'=>'User updated'
+                        'message'=>'User updated succesfully'
                     ],status:200);
             }
 
@@ -149,7 +149,7 @@ class UserAccessController extends Controller
                 ]);
                 
                 return response()->json([
-                    'message'=>'User updated'
+                    'message'=>'User updated succesfully'
                 ],status:200);
 
         }
@@ -163,7 +163,7 @@ class UserAccessController extends Controller
                     'password' => Hash::make($request->password),
                 ]);
                 return response()->json([
-                    'message'=>'User updated'
+                    'message'=>'User updated succesfully'
                 ],status:200);
         }
         }

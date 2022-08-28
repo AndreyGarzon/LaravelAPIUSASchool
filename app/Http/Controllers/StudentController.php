@@ -40,7 +40,9 @@ class StudentController extends Controller
     {
             Student::insert($request->data);
             return response()->json(
-                $request->data,status:201);
+                [   'message'=>'Student created succesfully',
+                    'data'=>$request->data],
+                status:201);
 
     }
 
@@ -78,7 +80,10 @@ class StudentController extends Controller
     public function update(UpdateStudentRequest $request, Student $student)
     {
         $student->update($request->all());
-        return $student;
+        return response()->json(
+            [   'message'=>'Student updated succesfully',
+                'data'=>$student],
+            status:200);
     }
 
     /**

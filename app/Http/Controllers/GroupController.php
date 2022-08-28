@@ -39,8 +39,21 @@ class GroupController extends Controller
      */
     public function store(StoreGroupRequest $request)
     {
-        $group = Group::create($request->all());
-        return $group;
+        $teacher_id =  User::select('teachers.id')                                        
+        ->join('teachers','users.id','=','teachers.user_id')->where('users.id',$request->user_id)
+        ->get();
+
+
+        $group = new Group;
+        $group->group_name = $request->group_name;
+        $group->teacher_id =  $teacher_id[0]->id;
+ 
+        $group->save();
+        return response()->json(
+            [   'message'=>'Group created succesfully',
+                'data'=>$group],
+            status:201);
+
     }
 
     /**
@@ -78,7 +91,10 @@ class GroupController extends Controller
     public function update(UpdateGroupRequest $request, Group $group)
     {
         $group->update($request->all());
-        return $group;
+        return response()->json(
+            [   'message'=>'Group updated succesfully',
+                'data'=>$group],
+            status:200);
 
     }
 

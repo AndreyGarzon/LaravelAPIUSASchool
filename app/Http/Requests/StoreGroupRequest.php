@@ -24,8 +24,7 @@ class StoreGroupRequest extends FormRequest
     public function rules()
     {
         return [
-            'group_name'=>['required','unique:groups'],
-            'teacher_id'=>'required',
+            'group_name'=>'required',
         ];
     }
 }
