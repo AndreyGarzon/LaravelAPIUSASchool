@@ -18,48 +18,48 @@ class StudentSeeder extends Seeder
     {
         $data = [
             [
-                'first_name' => 'Student ',
-                'last_name' => '1',
+                'first_name' => 'Student 1',
+                'last_name' => '',
                 'group_id'=>'1'
             ],
             [
-                'first_name' => 'Student ',
-                'last_name' => '2',
+                'first_name' => 'Student 2',
+                'last_name' => '',
                 'group_id'=>'1'
             ],
             [
-                'first_name' => 'Student ',
-                'last_name' => '3',
+                'first_name' => 'Student 3',
+                'last_name' => '',
                 'group_id'=>'1'
             ],
             [
-                'first_name' => 'Student ',
-                'last_name' => '4',
+                'first_name' => 'Student 4',
+                'last_name' => '',
                 'group_id'=>'2'
             ],
             [
-                'first_name' => 'Student ',
-                'last_name' => '5',
+                'first_name' => 'Student 5',
+                'last_name' => '',
                 'group_id'=>'2'
             ],
             [
-                'first_name' => 'Student ',
-                'last_name' => '6',
+                'first_name' => 'Student 6',
+                'last_name' => '',
                 'group_id'=>'2'
             ],
             [
-                'first_name' => 'Student ',
-                'last_name' => '7',
+                'first_name' => 'Student 7',
+                'last_name' => '',
                 'group_id'=>'3'
             ],
             [
-                'first_name' => 'Student ',
-                'last_name' => '8',
+                'first_name' => 'Student 8',
+                'last_name' => '',
                 'group_id'=>'3'
             ],
             [
-                'first_name' => 'Student ',
-                'last_name' => '9',
+                'first_name' => 'Student 9',
+                'last_name' => '',
                 'group_id'=>'3'
             ],
         ];

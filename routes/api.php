@@ -38,6 +38,7 @@ Route::group(['middleware'=>['auth:sanctum','CheckRole:manager']],function(){
 //Students API
     Route::apiResource('student',StudentController::class);
     Route::post('/student/deleteall',[StudentController::class,'deleteAll']);
+    Route::get('/student',[StudentController::class,'userStudents']);
 //Games API
     Route::apiResource('games',GameController::class)->only('show');
 });

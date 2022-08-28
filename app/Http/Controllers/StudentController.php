@@ -104,4 +104,14 @@ class StudentController extends Controller
         // return response()->json($users->id);
                 return response('',204);
     }
+
+    public function userStudents()
+    {
+        $student =  User::select('students.*')                                        
+                    ->join('teachers','users.id','=','teachers.user_id')
+                    ->join('groups','teachers.id','=','groups.teacher_id')
+                    ->join('students','groups.id','=','students.group_id')->get();
+        return $student;
+
+    }
 }
