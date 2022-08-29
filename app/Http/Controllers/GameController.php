@@ -48,7 +48,26 @@ class GameController extends Controller
     public function show($id)
     {
         $games = Game::where('game_group_id',$id)->get();
-        return  $games;
+
+
+            // Get array length
+            $count = count($games);
+            // Create a range of indicies
+            $indi = range(0,$count-1);
+            // Randomize indicies array
+            shuffle($indi);
+            // Initialize new array
+            $newarray = array($count);
+            // Holds current index
+            $i = 0;
+            // Shuffle multidimensional array
+            foreach ($indi as $index)
+            {
+                $newarray[$i] = $games[$index];
+                $i++;
+            }
+            return $newarray;
+
     }
 
     
