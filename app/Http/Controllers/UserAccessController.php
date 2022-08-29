@@ -59,12 +59,15 @@ class UserAccessController extends Controller
                 Teacher::create([
                     'user_id'=>$user->id
                 ]);
-                return response()->json(
-                    $user,status:201);
+                return response()->json([
+                    'message'=>'User created succesfully',
+                    'data'=>$user
+                ],status:201);
             }
             else{
                 return response()->json([
-                    'message'=>'User created succesfully'
+                    'message'=>'User created succesfully',
+                    'data'=>$user
                 ],status:201);
             } 
     }
@@ -87,7 +90,8 @@ class UserAccessController extends Controller
                 ]);
 
                 return response()->json([
-                    'message'=>'User created succesfully'
+                    'message'=>'User created succesfully',
+                    'data'=>$user
                 ],status:201);
         }
         else {
