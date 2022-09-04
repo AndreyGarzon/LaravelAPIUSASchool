@@ -95,7 +95,7 @@ class GameSeeder extends Seeder
             ['game_group_id'=>'2','game_name'=>'upper_B' ],
             ['game_group_id'=>'2','game_name'=>'upper_R' ],
             ['game_group_id'=>'2','game_name'=>'upper_E' ],
-            ['game_group_id'=>'3','game_name'=>'a' ],
+            ['game_group_id'=>'3','game_name'=>'_a' ],
             ['game_group_id'=>'3','game_name'=>'_and' ],
             ['game_group_id'=>'3','game_name'=>'_away' ],
             ['game_group_id'=>'3','game_name'=>'_big' ],
