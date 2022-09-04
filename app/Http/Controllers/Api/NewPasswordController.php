@@ -35,6 +35,7 @@ class NewPasswordController extends Controller
         ]);
     }
 
+
     public function reset(Request $request)
     {
         $request->validate([
