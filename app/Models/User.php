@@ -49,7 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function sendPasswordResetNotification($token)
     {
 
-        $url = 'http://ec2-3-20-240-131.us-east-2.compute.amazonaws.com:8000/reset-password?token=' . $token;
+        $url = 'http://ec2-3-20-240-131.us-east-2.compute.amazonaws.com:8000/auth/reset-password?token=' . $token;
 
         $this->notify(new ResetPasswordNotification($url));
     }
