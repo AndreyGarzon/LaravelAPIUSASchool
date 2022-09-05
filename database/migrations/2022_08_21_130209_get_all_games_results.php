@@ -97,13 +97,13 @@ return new class extends Migration
             )
           ) INTO @sql
           FROM GameResults;
-          SET @sql = CONCAT('SELECT SAB.student_id
-                            , SAB.student_name
-                            , AVG(PROM)  Total, ', @sql, ' 
-                           FROM GameResults SAB
-                            GROUP BY SAB.student_id,
-                                        SAB.student_name
-                            ORDER BY SAB.student_id ASC');
+          SET @sql = CONCAT('SELECT
+                            SAB.student_name
+                            ,AVG(PROM)  Total, ', @sql, ' 
+                            FROM GameResults SAB
+                            GROUP BY 	SAB.student_id,
+                                    SAB.student_name
+                            ORDER BY SAB.student_name ASC');
         
         PREPARE stmt FROM @sql;
         EXECUTE stmt;

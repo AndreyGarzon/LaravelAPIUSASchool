@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\GameResult;
 use App\Http\Requests\StoreGameResultRequest;
 use App\Http\Requests\UpdateGameResultRequest;
+use App\Models\GameGroup;
 use App\Models\SessionGame;
+use Illuminate\Database\Eloquent\Casts\ArrayObject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -88,7 +90,23 @@ class GameResultController extends Controller
         try {
             $queryResult = DB::select('CALL `usaschool`.`GetAllGamesResults`(?,?,?)', [$request->date,$request->group_id,$request->report_id]);
             $result = collect($queryResult);
-            return $result;
+            $game_name =  GameGroup::select('game_groups.game_group_name')->where('id',$request->report_id)->get();
+
+            $first_result = (array)$result[0];
+
+            $headers =  array_keys($first_result);
+
+
+
+            return response ()->json(
+                [
+                    'Title'=>$game_name[0]['game_group_name'],
+                    'headers'=>$headers,
+                    'data'=>$result
+                ]
+                );
+
+
         } catch (\Exception  $e) {
             return response()->json([
             ],status:200);
