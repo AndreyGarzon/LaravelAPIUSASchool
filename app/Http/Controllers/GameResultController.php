@@ -101,8 +101,8 @@ class GameResultController extends Controller
             return response ()->json(
                 [
                     'Title'=>$game_name[0]['game_group_name'],
-                    'headers'=>$headers,
-                    'data'=>$result
+                    'ColumnHeaders'=>$headers,
+                    'Data'=>$result
                 ]
                 );
 
