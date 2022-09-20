@@ -38,7 +38,7 @@ return new class extends Migration
             FROM 
 	(
         SELECT 
-            CONCAT(STU.first_name, ' ', STU.last_name) AS student_name,
+			STU.first_name AS student_name,
             RES.id,
             GRU.teacher_id,
             STU.group_id,
@@ -85,7 +85,7 @@ return new class extends Migration
         CREATE TEMPORARY TABLE IF NOT EXISTS  GameResults (
 
         SELECT 
-            CONCAT(STU.first_name, ' ', STU.last_name) AS student_name,
+            STU.first_name AS student_name,
             RES.id,
             GRU.teacher_id,
             STU.group_id,
