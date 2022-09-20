@@ -76,7 +76,7 @@ return new class extends Migration
             GROUP BY 
            student_id,
             student_name
-        ); SELECT * FROM GameResults;  
+        ); 
         
         END IF;
 	IF TypeReporQuery =  2 THEN 
