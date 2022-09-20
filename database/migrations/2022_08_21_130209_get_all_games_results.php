@@ -77,7 +77,7 @@ return new class extends Migration
            student_id,
             student_name
         ); 
-        
+        SELECT * FROM GameResults;
         END IF;
 	IF TypeReporQuery =  2 THEN 
                  
