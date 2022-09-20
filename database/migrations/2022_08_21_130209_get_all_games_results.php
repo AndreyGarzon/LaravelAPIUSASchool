@@ -129,7 +129,7 @@ return new class extends Migration
             STU.group_id,
             SES.student_id,
             SUM(CASE WHEN game_option_name = 'TRUE' THEN 1 ELSE 0 END) OVER (partition by SES.student_id) AS Q,
-            SUM(CASE WHEN game_option_name = 'TRUE'  THEN 1 ELSE 0 END) OVER (partition by SES.student_id)/(SELECT count(*) FROM usaschool.games where game_group_id = ReporQuery) AS PROM
+            SUM(CASE WHEN game_option_name = 'TRUE'  THEN 1 ELSE 0 END) OVER (partition by SES.student_id)/COUNT(game_option_name) OVER (partition by SES.student_id) AS PROM
         FROM
             usaschool.game_results AS RES
             LEFT JOIN 
