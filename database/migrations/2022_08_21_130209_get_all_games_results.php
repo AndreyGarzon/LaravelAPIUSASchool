@@ -83,11 +83,7 @@ return new class extends Migration
                  
         DROP TABLE IF EXISTS GameResults;
         CREATE TEMPORARY TABLE IF NOT EXISTS  GameResults (
-            SELECT 	A.*,
-                    B.Q,
-                    B.PROM
-            FROM 
-            (
+
         SELECT 
             CONCAT(STU.first_name, ' ', STU.last_name) AS student_name,
             RES.id,
@@ -102,7 +98,8 @@ return new class extends Migration
             GRO.game_group_name,
             CASE WHEN GOP.game_option_name = 'TRUE' THEN 1 ELSE 0 END AS correct_answer,
             CASE WHEN GOP.game_option_name = 'FALSE' THEN 1 ELSE 0 END AS incorrect_answer,
-            CASE WHEN GOP.game_option_name = 'NULL' THEN 1 ELSE 0 END AS unknown_answer
+            CASE WHEN GOP.game_option_name = 'NULL' THEN 1 ELSE 0 END AS unknown_answer,
+            1 AS Resp
         
         FROM
             usaschool.game_results AS RES
@@ -121,33 +118,9 @@ return new class extends Migration
             WHERE  CAST(SES.created_at AS DATE) =  DateQuery
                 AND  STU.group_id =  GroupQuery
                 AND GRO.id = ReporQuery
-            ) AS A 
-            
-            LEFT JOIN (
-            SELECT 
-            DISTINCT
-            STU.group_id,
-            SES.student_id,
-            SUM(CASE WHEN game_option_name = 'TRUE' THEN 1 ELSE 0 END) OVER (partition by SES.student_id) AS Q,
-            SUM(CASE WHEN game_option_name = 'TRUE'  THEN 1 ELSE 0 END) OVER (partition by SES.student_id)/COUNT(game_option_name) OVER (partition by SES.student_id) AS PROM
-        FROM
-            usaschool.game_results AS RES
-            LEFT JOIN 
-                usaschool.session_games AS SES ON RES.session_game_id = SES.id
-            LEFT JOIN 
-                usaschool.students AS STU ON SES.student_id = STU.id
-            LEFT JOIN
-                usaschool.game_options GOP ON RES.game_option_id = GOP.id
-            LEFT JOIN
-                usaschool.games GAM ON RES.game_id = GAM.id
-            LEFT JOIN 
-                usaschool.game_groups GRO ON GAM.game_group_id = GRO.id
-            WHERE CAST(RES.created_at AS DATE) =  DateQuery
-                AND  STU.group_id =  GroupQuery
-                AND GRO.id = ReporQuery
-            ) AS B
-            ON A.student_id = B.student_id
+		
         );
+        
         SET SESSION group_concat_max_len=1000000000000;
         SET @sql = NULL;
         SELECT
@@ -162,7 +135,7 @@ return new class extends Migration
           FROM GameResults;
           SET @sql = CONCAT('SELECT
                             SAB.student_name
-                            ,AVG(PROM)  Total, ', @sql, ' 
+                            ,SUM(correct_answer)/SUM(Resp) Total, ', @sql, ' 
                             FROM GameResults SAB
                             GROUP BY 	SAB.student_id,
                                     SAB.student_name
