@@ -52,7 +52,7 @@ class SessionGameController extends Controller
     public function show($id)
     {
         // $session_games =  SessionGame::with('')->where('state_session_game_id','2')->where('teacher_id',$id)->get();
-        $session_games =  User::select(DB::raw("CONCAT(ifnull(students.first_name,''),' ',ifnull(students.last_name,'')) student_name"),
+        $session_games =  User::select(DB::raw("students.first_name student_name"),
                                                 'students.group_id',
                                                 'groups.group_name',
                                                 'session_games.*',
