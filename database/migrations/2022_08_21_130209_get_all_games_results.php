@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         $procedure = "
-        CREATE  PROCEDURE GetAllGeneralResults(IN DateQuery DATE,IN GroupQuery INT, IN ReporQuery INT, IN TypeReporQuery INT)
+        CREATE  PROCEDURE GetAllGeneralResults(IN InitialDate DATE,IN EndDate DATE,IN GroupQuery INT, IN ReporQuery INT, IN TypeReporQuery INT)
         BEGIN 
 
         IF TypeReporQuery =  1
@@ -23,18 +23,18 @@ return new class extends Migration
         DROP TABLE IF EXISTS GameResults;
         CREATE TEMPORARY TABLE IF NOT EXISTS  GameResults (
             SELECT 	
+            date_result,
+			time_result,
             student_name,
-			(SUM(IF(game_group_id = 1, correct_answer, null))/ SUM(if(game_group_id = 1, total_answer, null)))   AS Letter_Recognition,
-			(SUM(IF(game_group_id = 2, correct_answer, null))/ SUM(if(game_group_id = 2, total_answer, null)))   AS Sound_Recognition,
-            (SUM(IF(game_group_id = 3, correct_answer, null))/ SUM(if(game_group_id = 3, total_answer, null)))   AS Pre_K_Dolch_Sight_Words,
-            (SUM(IF(game_group_id = 4, correct_answer, null))/ SUM(if(game_group_id = 4, total_answer, null)))   AS Kindergarten_Dolch_Sight_Words,
-            (SUM(IF(game_group_id = 5, correct_answer, null))/ SUM(if(game_group_id = 5, total_answer, null)))   AS First_Grade_Dolch_Sight_Words,
-            (SUM(IF(game_group_id = 6, correct_answer, null))/ SUM(if(game_group_id = 6, total_answer, null)))   AS Second_Grade_Dolch_Sight_Words,
-            (SUM(IF(game_group_id = 7, correct_answer, null))/ SUM(if(game_group_id = 7, total_answer, null)))   AS Third_Grade_Dolch_Sight_Words,
-            (SUM(IF(game_group_id = 8, correct_answer, null))/ SUM(if(game_group_id = 8, total_answer, null)))   AS Noun_Dolch_Sight_Words
+			ROUND(((SUM(IF(game_group_id = 1, correct_answer, null))/ SUM(if(game_group_id = 1, total_answer, null)))*100),0)    AS Letter_Recognition,
+			ROUND(((SUM(IF(game_group_id = 2, correct_answer, null))/ SUM(if(game_group_id = 2, total_answer, null)))*100),0)    AS Sound_Recognition,
+            ROUND(((SUM(IF(game_group_id = 3, correct_answer, null))/ SUM(if(game_group_id = 3, total_answer, null)))*100),0)    AS Pre_K_Dolch_Sight_Words,
+            ROUND(((SUM(IF(game_group_id = 4, correct_answer, null))/ SUM(if(game_group_id = 4, total_answer, null)))*100),0)    AS Kindergarten_Dolch_Sight_Words,
+            ROUND(((SUM(IF(game_group_id = 5, correct_answer, null))/ SUM(if(game_group_id = 5, total_answer, null)))*100),0)    AS First_Grade_Dolch_Sight_Words,
+            ROUND(((SUM(IF(game_group_id = 6, correct_answer, null))/ SUM(if(game_group_id = 6, total_answer, null)))*100),0)    AS Second_Grade_Dolch_Sight_Words,
+            ROUND(((SUM(IF(game_group_id = 7, correct_answer, null))/ SUM(if(game_group_id = 7, total_answer, null)))*100),0)    AS Third_Grade_Dolch_Sight_Words,
+            ROUND(((SUM(IF(game_group_id = 8, correct_answer, null))/ SUM(if(game_group_id = 8, total_answer, null)))*100),0)    AS Noun_Dolch_Sight_Words
             
-            
-			
             FROM 
 	(
         SELECT 
@@ -46,6 +46,7 @@ return new class extends Migration
             RES.game_id,
             RES.game_option_id,
             CAST(SES.created_at AS DATE) date_result,
+			CAST(SES.created_at AS TIME(0)) time_result,
             REPLACE(GAM.game_name,' ','_') game_name,
             GOP.game_option_name,
             REPLACE(GRO.game_group_name,' ','_') game_group_name,
@@ -69,13 +70,15 @@ return new class extends Migration
             usaschool.game_options GOP ON RES.game_option_id = GOP.id
                 LEFT JOIN 
             usaschool.game_groups GRO ON GAM.game_group_id = GRO.id
-            WHERE  CAST(SES.created_at AS DATE) =  DateQuery
+            WHERE  CAST(SES.created_at AS DATE) >=  InitialDate AND CAST(SES.created_at AS DATE) <= EndDate
                 AND  STU.group_id =  GroupQuery
 
             ) AS A 
             GROUP BY 
-           student_id,
-            student_name
+				date_result,
+				time_result,
+				student_id,
+				student_name
         ); 
         SELECT * FROM GameResults;
         END IF;
@@ -93,6 +96,7 @@ return new class extends Migration
             RES.game_id,
             RES.game_option_id,
             CAST(SES.created_at AS DATE) date_result,
+			CAST(SES.created_at AS TIME(0)) time_result,
             REPLACE(GAM.game_name,' ','_') game_name,
             GOP.game_option_name,
             GRO.game_group_name,
@@ -115,7 +119,7 @@ return new class extends Migration
             usaschool.game_options GOP ON RES.game_option_id = GOP.id
                 LEFT JOIN 
             usaschool.game_groups GRO ON GAM.game_group_id = GRO.id
-            WHERE  CAST(SES.created_at AS DATE) =  DateQuery
+            WHERE  CAST(SES.created_at AS DATE) >=  InitialDate AND CAST(SES.created_at AS DATE) <= EndDate
                 AND  STU.group_id =  GroupQuery
                 AND GRO.id = ReporQuery
 		
@@ -134,11 +138,15 @@ return new class extends Migration
           ) INTO @sql
           FROM GameResults;
           SET @sql = CONCAT('SELECT
-                            SAB.student_name
-                            ,SUM(correct_answer)/SUM(Resp) Total, ', @sql, ' 
+							date_result
+                            ,time_result
+                            ,student_name
+                            ,ROUND(((SUM(correct_answer)/SUM(Resp))*100),0) Total, ', @sql, ' 
                             FROM GameResults SAB
-                            GROUP BY 	SAB.student_id,
-                                    SAB.student_name
+                            GROUP BY 	date_result,
+										time_result,
+										student_id,
+										student_name
                             ORDER BY SAB.student_name ASC');
         
         PREPARE stmt FROM @sql;
