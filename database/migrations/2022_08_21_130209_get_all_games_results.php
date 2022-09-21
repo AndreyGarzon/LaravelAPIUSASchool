@@ -160,8 +160,6 @@ return new class extends Migration
                 
          END IF;
                 END
-                
-        
     ";
 
     DB::unprepared("DROP PROCEDURE IF EXISTS GetAllGeneralResults");
