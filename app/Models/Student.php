@@ -11,7 +11,7 @@ class Student extends Model
     use HasFactory;
     protected $fillable =[
         'first_name',
-        'last_name',
+        'code',
         'group_id'
     ];
     public function group(){
