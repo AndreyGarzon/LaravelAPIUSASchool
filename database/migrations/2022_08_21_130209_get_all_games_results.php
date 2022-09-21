@@ -26,6 +26,7 @@ return new class extends Migration
 			date_,
 			time_,
             student_name,
+            code,
 			ROUND(((SUM(IF(game_group_id = 1, correct_answer, null))/ SUM(if(game_group_id = 1, total_answer, null)))*100),0)    AS Letter_Recognition,
 			ROUND(((SUM(IF(game_group_id = 2, correct_answer, null))/ SUM(if(game_group_id = 2, total_answer, null)))*100),0)    AS Sound_Recognition,
             ROUND(((SUM(IF(game_group_id = 3, correct_answer, null))/ SUM(if(game_group_id = 3, total_answer, null)))*100),0)    AS Pre_K_Dolch_Sight_Words,
