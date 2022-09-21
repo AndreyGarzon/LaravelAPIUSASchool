@@ -82,7 +82,7 @@ class StudentController extends Controller
         $student->update($request->all());
         return response()->json(
             [   'message'=>'Student updated succesfully',
-                'data'=>$student],
+                'data'=>$request->all()],
             status:200);
     }
 
