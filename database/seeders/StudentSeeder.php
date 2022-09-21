@@ -19,47 +19,47 @@ class StudentSeeder extends Seeder
         $data = [
             [
                 'first_name' => 'Student 1',
-                'last_name' => '',
+                'code' => '123456',
                 'group_id'=>'1'
             ],
             [
                 'first_name' => 'Student 2',
-                'last_name' => '',
+                'code' => '123456',
                 'group_id'=>'1'
             ],
             [
                 'first_name' => 'Student 3',
-                'last_name' => '',
+                'code' => '123456',
                 'group_id'=>'1'
             ],
             [
                 'first_name' => 'Student 4',
-                'last_name' => '',
+                'code' => '123456',
                 'group_id'=>'2'
             ],
             [
                 'first_name' => 'Student 5',
-                'last_name' => '',
+                'code' => '123456',
                 'group_id'=>'2'
             ],
             [
                 'first_name' => 'Student 6',
-                'last_name' => '',
+                'code' => '123456',
                 'group_id'=>'2'
             ],
             [
                 'first_name' => 'Student 7',
-                'last_name' => '',
+                'code' => '123456',
                 'group_id'=>'3'
             ],
             [
                 'first_name' => 'Student 8',
-                'last_name' => '',
+                'code' => '123456',
                 'group_id'=>'3'
             ],
             [
                 'first_name' => 'Student 9',
-                'last_name' => '',
+                'code' => '123456',
                 'group_id'=>'3'
             ],
         ];
