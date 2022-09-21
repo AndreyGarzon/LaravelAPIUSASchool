@@ -23,8 +23,8 @@ return new class extends Migration
         DROP TABLE IF EXISTS GameResults;
         CREATE TEMPORARY TABLE IF NOT EXISTS  GameResults (
             SELECT 	
-            date_result,
-			time_result,
+			date_,
+			time_,
             student_name,
 			ROUND(((SUM(IF(game_group_id = 1, correct_answer, null))/ SUM(if(game_group_id = 1, total_answer, null)))*100),0)    AS Letter_Recognition,
 			ROUND(((SUM(IF(game_group_id = 2, correct_answer, null))/ SUM(if(game_group_id = 2, total_answer, null)))*100),0)    AS Sound_Recognition,
@@ -43,10 +43,11 @@ return new class extends Migration
             GRU.teacher_id,
             STU.group_id,
             SES.student_id,
+            STU.code,
             RES.game_id,
             RES.game_option_id,
-            CAST(SES.created_at AS DATE) date_result,
-			CAST(SES.created_at AS TIME(0)) time_result,
+            CAST(SES.created_at AS DATE) date_,
+			CAST(SES.created_at AS TIME(0)) time_,
             REPLACE(GAM.game_name,' ','_') game_name,
             GOP.game_option_name,
             REPLACE(GRO.game_group_name,' ','_') game_group_name,
@@ -75,10 +76,11 @@ return new class extends Migration
 
             ) AS A 
             GROUP BY 
-				date_result,
-				time_result,
+				date_,
+				time_,
 				student_id,
-				student_name
+				student_name,
+                code
         ); 
         SELECT * FROM GameResults;
         END IF;
@@ -93,10 +95,11 @@ return new class extends Migration
             GRU.teacher_id,
             STU.group_id,
             SES.student_id,
+			STU.code,
             RES.game_id,
             RES.game_option_id,
-            CAST(SES.created_at AS DATE) date_result,
-			CAST(SES.created_at AS TIME(0)) time_result,
+            CAST(SES.created_at AS DATE) date_,
+			CAST(SES.created_at AS TIME(0)) time_,
             REPLACE(GAM.game_name,' ','_') game_name,
             GOP.game_option_name,
             GRO.game_group_name,
@@ -138,15 +141,17 @@ return new class extends Migration
           ) INTO @sql
           FROM GameResults;
           SET @sql = CONCAT('SELECT
-							date_result
-                            ,time_result
+							date_
+                            ,time_
                             ,student_name
+                            ,code
                             ,ROUND(((SUM(correct_answer)/SUM(Resp))*100),0) Total, ', @sql, ' 
                             FROM GameResults SAB
-                            GROUP BY 	date_result,
-										time_result,
+                            GROUP BY 	date_,
+										time_,
 										student_id,
-										student_name
+										student_name,
+                                        code
                             ORDER BY SAB.student_name ASC');
         
         PREPARE stmt FROM @sql;
