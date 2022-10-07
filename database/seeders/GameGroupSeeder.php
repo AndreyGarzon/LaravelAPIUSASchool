@@ -41,6 +41,12 @@ class GameGroupSeeder extends Seeder
             [
                 'game_group_name'=>'Noun Dolch Sight Words',
             ],
+            [
+                'game_group_name'=>'Lower Letter Recognition',
+            ],
+            [
+                'game_group_name'=>'Upper Letter Recognition',
+            ],
             ];
         DB::table('game_groups')->insert($data);
     }
